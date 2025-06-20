@@ -1,0 +1,16 @@
+<div class="carousel-wrapper">
+  <div class="carousel-container">
+    @for (boxNumber of getBoxNumbers(); track boxNumber) {
+    <div class="carousel-box">
+      <div class="box-content">
+        <h3>{{ getProjectName(boxNumber).text }}</h3>
+        <div class="sliderimg">
+          <a href="{{getProjectName(boxNumber).href}}"
+            ><img [src]="getProjectName(boxNumber).src"
+          /></a>
+        </div>
+      </div>
+    </div>
+    }
+  </div>
+</div>
