@@ -8,11 +8,12 @@ import {
 } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 import { PROJECTS } from '../../../constants/projects';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-carousel',
   standalone: true,
-  imports: [],
+  imports: [RouterLink],
   templateUrl: './carousel.html',
   styleUrl: './carousel.scss',
 })

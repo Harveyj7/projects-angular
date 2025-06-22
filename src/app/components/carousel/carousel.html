@@ -5,7 +5,7 @@
       <div class="box-content">
         <h3>{{ getProjectName(boxNumber).text }}</h3>
         <div class="sliderimg">
-          <a href="{{getProjectName(boxNumber).href}}"
+          <a routerLink="{{getProjectName(boxNumber).href}}"
             ><img [src]="getProjectName(boxNumber).src"
           /></a>
         </div>

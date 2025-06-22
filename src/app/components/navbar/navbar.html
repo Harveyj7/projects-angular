@@ -4,15 +4,18 @@
   </div>
 
   <ul>
+    <li>
+      <a routerLink="">Home</a>
+    </li>
     <li (mouseenter)="showDropdown($event)" (mouseleave)="hideDropdown()">
-      <a href="#">About Me</a>
+      <a>About Me</a>
       <div class="dropdown about">
         <img [src]="projects.about.src" />
         <p>{{ projects.about.text }}</p>
       </div>
     </li>
     <li (mouseenter)="showDropdown($event)" (mouseleave)="hideDropdown()">
-      <a href="contact.html">Contact</a>
+      <a routerLink="/contact">Contact</a>
       <div class="dropdown contact">
         Contact me through mobile on:
         <b>07896145237</b>
@@ -21,7 +24,7 @@
         <b>Harveyy7&#64;gmail.com</b>
       </div>
     </li>
-    <li (mouseenter)="showDropdown($event)" (mouseleave)="hideDropdown()">
+    <!-- <li (mouseenter)="showDropdown($event)" (mouseleave)="hideDropdown()">
       <a href="#">Media Links </a>
       <div class="dropdown social">
         <a href="https://github.com/Harveyj7">
@@ -31,6 +34,6 @@
           <img [src]="'assets/images/linkedin.png'" width="50px"
         /></a>
       </div>
-    </li>
+    </li> -->
   </ul>
 </nav>

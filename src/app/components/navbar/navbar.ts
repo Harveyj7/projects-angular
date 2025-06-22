@@ -8,13 +8,15 @@ import {
   Input,
 } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
+import { RouterLink } from '@angular/router';
+
 
 @Component({
   selector: 'app-navbar',
+  standalone: true,
+  imports: [RouterLink],
   templateUrl: './navbar.html',
   styleUrl: './navbar.scss',
-  imports: [],
-  standalone: true,
 })
 export class Navbar implements AfterViewInit {
   @Input() projects: any;
