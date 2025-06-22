@@ -5,6 +5,7 @@ nav {
 nav ul {
   list-style: none;
   display: flex;
+  flex-wrap: wrap;
   justify-content: left;
 }
 
@@ -17,10 +18,16 @@ ul > li > a {
   display: inline-block;
   margin: 20px;
   border-radius: 5px;
+  position: relative;
+  z-index: 2;
+  transition: all 0.3s ease;
 }
 
 ul > li > a:hover {
   background-color: rgb(198, 241, 195);
+  color: #333;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 ul > li {
@@ -38,11 +45,10 @@ ul > li {
   transform: translateY(100px);
   will-change: opacity;
   display: none;
+  z-index: 3;
 }
 
 .dropdownBackground {
-  width: 100px;
-  height: 100px;
   position: absolute;
   background: white;
   border-radius: 4px;
@@ -53,10 +59,15 @@ ul > li {
   display: flex;
   justify-content: center;
   opacity: 0;
+  z-index: 4;
 }
 
 .trigger-enter .dropdown {
   display: block;
+  opacity: 1;
+}
+
+.trigger-enter .dropdownBackground {
   opacity: 1;
 }
 
@@ -67,6 +78,8 @@ ul > li {
   display: block;
   background: white;
   transform: translateY(-50%) rotate(45deg);
+  z-index: 2;
+  top: 0;
 }
 
 .about {
@@ -75,6 +88,8 @@ ul > li {
   justify-content: center;
   align-items: center;
   line-height: 1.7;
+  background: white;
+  border-radius: 4px;
 }
 
 .about img {
@@ -84,22 +99,33 @@ ul > li {
 
 .contact {
   min-width: 20vw;
-  padding: 10px 0;
   display: block;
   border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+  background: white;
+  border-radius: 4px;
 }
 
-.social {
-  min-width: 120px;
+.social-links {
   display: flex;
   justify-content: space-evenly;
   flex-direction: row;
 }
+.social-links img {
+  width: 60px;
+  height: 50px;
+}
+
 @media (max-width: 600px) {
-  .ul > li > a {
+  ul > li > a {
     font-size: 15px;
     text-align: center;
     padding: 10px 5px;
+    margin: 10px 5px;
+  }
+
+  ul > li > a:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
   }
   .social {
     margin: -10px;

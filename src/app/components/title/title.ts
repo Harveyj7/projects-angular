@@ -4,25 +4,21 @@ import { Component } from '@angular/core';
   selector: 'app-title',
   standalone: true,
   imports: [],
-  template: `
-    <h1 class="title">Harvey - Projects</h1>
-  `,
-  styles: [`
-    .title {
-      font-size: 40px;
-      font-weight: bold;
-      color: #333;
-      white-space: nowrap;
-    }
-    
-    @media (max-width: 600px) {
+  template: ` <h1 class="title">Harvey - Projects</h1> `,
+  styles: [
+    `
       .title {
-        font-size: 32px;
-        text-align: center;
-        margin: 15px 0;
-        display: block;
+        font-size: 40px;
+        margin-left: 200px;
       }
-    }
-  `]
+
+      @media (max-width: 600px) {
+        .title {
+          font-size: 30px;
+          margin-left: 0px;
+        }
+      }
+    `,
+  ],
 })
-export class Title {} 
+export class Title {}

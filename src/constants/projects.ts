@@ -6,12 +6,12 @@ export const PROJECTS = {
   },
   elwp: {
     text: 'ELWP - React component',
-    href: 'elwp.html',
+    href: 'elwp',
     src: 'assets/images/waterworks_workshops.png',
   },
   js1: {
     text: 'JavaScript game 1',
-    href: 'game.html',
+    href: 'game',
     src: 'assets/images/diglett.png',
   },
   ima: {
@@ -21,22 +21,22 @@ export const PROJECTS = {
   },
   tableau: {
     text: 'Tableau application project',
-    href: 'tableau.html',
+    href: 'tableau',
     src: 'assets/images/mapviz.png',
   },
   magnets: {
     text: 'Renishaw Magnet FEA/ FEMM',
-    href: 'magnets.html',
+    href: 'magnets',
     src: 'assets/images/magnets.png',
   },
   glider: {
     text: 'Final Year project',
-    href: 'fyp.html',
+    href: 'fyp',
     src: 'assets/images/Glider.png',
   },
   otd: {
     text: 'Group Business Design Project',
-    href: 'gbdp.html',
+    href: 'gbdp',
     src: 'assets/images/OTD.png',
   },
   about: {
@@ -46,7 +46,7 @@ export const PROJECTS = {
               front-end frameworks. These are several of my pet projects that I
               have worked on in my spare time, most of the work is old so give
               it some benefit of the doubt if possible!`,
-    href: 'about.html',
+    href: 'about',
     src: 'assets/images/harveysmall.jpg',
   },
 };

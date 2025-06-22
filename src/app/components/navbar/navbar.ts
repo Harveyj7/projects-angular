@@ -10,7 +10,6 @@ import {
 import { isPlatformBrowser } from '@angular/common';
 import { RouterLink } from '@angular/router';
 
-
 @Component({
   selector: 'app-navbar',
   standalone: true,
@@ -62,7 +61,7 @@ export class Navbar implements AfterViewInit {
 
   showDropdown(event: MouseEvent): void {
     console.log('hovered', event);
-    let displace = 0;
+    // let displace = 0;
     const trigger = (event.target as HTMLElement).closest('li') as HTMLElement;
 
     if (!trigger) return;
@@ -89,18 +88,18 @@ export class Navbar implements AfterViewInit {
     this.background.style.setProperty('width', `${coords.width}px`);
     this.background.style.setProperty('height', `${coords.height}px`);
 
-    if (
-      trigger.children[0]?.innerHTML === 'About Me' &&
-      document.body.offsetWidth < 600
-    ) {
-      displace = 100;
-      this.arrow?.style.setProperty('left', '30px');
-    }
+    // if (
+    //   trigger.children[0]?.innerHTML === 'About Me' &&
+    //   document.body.offsetWidth < 600
+    // ) {
+    //   displace = 100;
+    //   this.arrow?.style.setProperty('left', '30px');
+    // }
 
     this.background.style.setProperty(
       'transform',
-      `translate(${coords.left + displace}px, ${coords.top}px)`
+      `translate(${coords.left}px, ${coords.top}px)`
     );
-    this.about?.style.setProperty('margin-left', `${2 * displace}px`);
+    this.about?.style.setProperty('margin-left', `${2 * 0}px`);
   }
 }
