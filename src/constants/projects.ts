@@ -1,7 +1,7 @@
 export const PROJECTS = {
   lang: {
     text: 'Languages application',
-    href: 'languages.html',
+    href: 'languages',
     src: 'assets/images/languages.png',
   },
   elwp: {
