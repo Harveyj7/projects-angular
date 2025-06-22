@@ -1,0 +1,1 @@
+import{Ka as n,La as m,Ta as o,xa as a}from"./chunk-BQ5PE2TB.js";var s=class t{static \u0275fac=function(e){return new(e||t)};static \u0275cmp=a({type:t,selectors:[["app-game"]],decls:2,vars:0,template:function(e,p){e&1&&(n(0,"p"),o(1,"game works!"),m())},encapsulation:2})};export{s as Game};

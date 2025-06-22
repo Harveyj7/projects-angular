@@ -1,0 +1,1 @@
+import{Ka as p,La as o,Ta as s,xa as n}from"./chunk-BQ5PE2TB.js";var a=class t{static \u0275fac=function(e){return new(e||t)};static \u0275cmp=n({type:t,selectors:[["app-gbdp"]],decls:2,vars:0,template:function(e,c){e&1&&(p(0,"p"),s(1,"gbdp works!"),o())},encapsulation:2})};export{a as Gbdp};

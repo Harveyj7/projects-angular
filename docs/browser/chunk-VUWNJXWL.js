@@ -1,0 +1,1 @@
+import{a as r}from"./chunk-2MF2GDU7.js";import{Ka as n,La as o,Ta as s,xa as t}from"./chunk-BQ5PE2TB.js";var i=class a{projects=r;static \u0275fac=function(e){return new(e||a)};static \u0275cmp=t({type:a,selectors:[["app-languages"]],decls:2,vars:0,template:function(e,m){e&1&&(n(0,"p"),s(1,"languages works!"),o())},encapsulation:2})};export{i as Languages};
