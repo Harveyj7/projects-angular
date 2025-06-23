@@ -73,7 +73,14 @@ export class Carousel implements AfterViewInit {
   }
 
   onCarouselBoxDoubleClick(href: string): void {
-    this.router.navigate([href]);
+    // Check if it's an external URL
+    if (href.startsWith('http://') || href.startsWith('https://')) {
+      // Open external URL in a new tab
+      window.open(href, '_blank');
+    } else {
+      // Navigate to internal route
+      this.router.navigate([href]);
+    }
   }
 
   private resetCarousel(): void {

@@ -1,0 +1,95 @@
+<!--<a href="italian.csv" style="text-decoration: none; display: flex; align-items: center; justify-content: center; gap: 5px;">
+        <img src="images/language_icon.png" width="20px" alt="Example file"/>
+        Example CSV File download
+    </a>-->
+<a
+  class="example"
+  href="data:text/csv;
+    charset=utf-8,VERBS:%0Aparlo,speak%0Aallontarsi,to%20move%20away%0Afaccio,do%0Amangio,eat%0Avedo,see%0Avoglio,want%0Aio%20ho,i%20have%0Apiache,like%0Aho%20bisogno,i%20need%0Avado,go%0AVOCAB:%0ASorella,Sister%0AFratello,Brother%0APiacere,Pleasure%0ADieci,ten%0AScontrino,Recipt%0APiccolo,Small%0ASpeccio,Mirror%0ANero,Black%0AZaino,Backpack%0AMaglione,Sweater"
+  download="italian.csv"
+>
+  <img src="images/language_icon.png" width="20px" alt="Example file" />
+  Example CSV File
+</a>
+
+<div class="button-container">
+  <button class="btn" (click)="openAddWordModal()">Add word</button>
+  <button class="btn" (click)="openTestWordsModal()">Test words</button>
+  <button class="btn" (click)="importCSV()">Import CSV</button>
+  <button class="btn" (click)="exportCSV()">Export CSV</button>
+  <button class="btn" (click)="clearVocabulary()">Clear All</button>
+  <input
+    type="file"
+    id="fileInput"
+    style="display: none"
+    (change)="handleFileSelect($event)"
+  />
+</div>
+
+<div class="vocab-table">
+  <h2>Verbs:</h2>
+  <table id="verbsTable">
+    <tbody></tbody>
+  </table>
+</div>
+
+<div class="vocab-table">
+  <h2>Vocabulary:</h2>
+  <table id="generalTable">
+    <tbody></tbody>
+  </table>
+</div>
+
+<!-- Add Word Modal -->
+<div id="addWordModal" class="modal" (click)="closeModalOnOutsideClick($event)">
+  <div class="modal-content">
+    <h2>Add new Word</h2>
+    <input
+      type="text"
+      class="input-field"
+      id="italianWord"
+      placeholder="Italian"
+    />
+    <input
+      type="text"
+      class="input-field"
+      id="englishWord"
+      placeholder="English"
+    />
+    <div class="button-group">
+      <button class="btn" (click)="addWord('verbs')">Add Verb</button>
+      <button class="btn" (click)="addWord('general')">Add Vocab</button>
+    </div>
+  </div>
+</div>
+
+<!-- Test Words Modal -->
+<div
+  id="testWordsModal"
+  class="modal"
+  (click)="closeModalOnOutsideClick($event)"
+>
+  <div class="modal-content">
+    <h2>Test Words</h2>
+    <div class="word-display" id="testWord">
+      Select a category to start testing
+    </div>
+    <div class="button-group">
+      <button class="btn" (click)="startTest('verbs')">Test Verbs</button>
+      <button class="btn" (click)="startTest('general')">Test Vocab</button>
+    </div>
+    <input
+      type="text"
+      class="input-field"
+      id="answer"
+      placeholder="Input answer"
+    />
+    <button
+      class="btn"
+      (click)="checkAnswer()"
+      style="width: 100%; margin-top: 10px"
+    >
+      Submit
+    </button>
+  </div>
+</div>

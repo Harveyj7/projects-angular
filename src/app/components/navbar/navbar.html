@@ -17,19 +17,16 @@
       </div>
     </li>
     <li>
-      <a
-        (mouseenter)="showDropdown($event)"
-        (mouseleave)="hideDropdown()"
-        routerLink="/contact"
-        >Contact</a
-      >
-      <div class="dropdown contact">
-        Contact me through mobile on:
-        <b>07896145237</b>
-        <br /><br />
-        Email me on:
-        <b>Harveyy7&#64;gmail.com</b>
-        <br /><br />
+      <a (mouseenter)="showDropdown($event)" routerLink="/contact">Contact</a>
+      <div class="dropdown contact" (mouseleave)="hideDropdown()">
+        <p>
+          Contact me through mobile on:
+          <b>07896145237</b>
+          <br /><br />
+          Email me on:
+          <b>Harveyy7&#64;gmail.com</b>
+          <br /><br />
+        </p>
         <div class="social-links">
           <a href="https://github.com/Harveyj7">
             <img [src]="'assets/images/iglogo.png'"

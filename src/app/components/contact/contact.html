@@ -1,0 +1,120 @@
+<div class="contact-container">
+  <div class="contact-form-section">
+    <h2>Contact Us</h2>
+
+    <!-- Success Message -->
+    <div *ngIf="submitSuccess" class="success-message">{{ submitMessage }}</div>
+
+    <!-- Contact Form -->
+    <form #contactForm="ngForm" (ngSubmit)="onSubmit()" class="contact-form">
+      <!-- Name Field -->
+      <div class="form-group">
+        <label for="name">Name *</label>
+        <input
+          type="text"
+          id="name"
+          name="name"
+          [(ngModel)]="formData.name"
+          #nameField="ngModel"
+          required
+          class="form-control"
+          placeholder="Enter your full name"
+          [class.error]="nameField.invalid && nameField.touched"
+        />
+        <div
+          *ngIf="nameField.invalid && nameField.touched"
+          class="error-message"
+        >
+          Name is required
+        </div>
+      </div>
+
+      <!-- Email Field -->
+      <div class="form-group">
+        <label for="email">Email *</label>
+        <input
+          type="email"
+          id="email"
+          name="email"
+          [(ngModel)]="formData.email"
+          #emailField="ngModel"
+          required
+          email
+          class="form-control"
+          placeholder="Enter your email address"
+          [class.error]="emailField.invalid && emailField.touched"
+        />
+        <div
+          *ngIf="emailField.invalid && emailField.touched"
+          class="error-message"
+        >
+          <span *ngIf="emailField.errors?.['required']">Email is required</span>
+          <span *ngIf="emailField.errors?.['email']"
+            >Please enter a valid email address</span
+          >
+        </div>
+      </div>
+
+      <!-- Message Field -->
+      <div class="form-group">
+        <label for="message">Message *</label>
+        <textarea
+          id="message"
+          name="message"
+          [(ngModel)]="formData.message"
+          #messageField="ngModel"
+          required
+          class="form-control"
+          placeholder="Enter your message"
+          rows="5"
+          [class.error]="messageField.invalid && messageField.touched"
+        >
+        </textarea>
+        <div
+          *ngIf="messageField.invalid && messageField.touched"
+          class="error-message"
+        >
+          Message is required
+        </div>
+      </div>
+
+      <!-- Submit Button -->
+      <div class="form-actions">
+        <button
+          type="submit"
+          class="submit-btn"
+          [disabled]="contactForm.invalid || isSubmitting"
+        >
+          <span *ngIf="isSubmitting" class="loading-spinner"></span>
+          {{ isSubmitting ? 'Submitting...' : 'Send Message' }}
+        </button>
+      </div>
+    </form>
+  </div>
+
+  <!-- Submitted Forms Display (for demonstration of state management) -->
+  <div class="submissions-section" *ngIf="submittedForms.length > 0">
+    <div class="submissions-header">
+      <h3>Submitted Forms (State Demo)</h3>
+      <button class="clear-btn" (click)="clearSubmissions()">Clear All</button>
+    </div>
+
+    <div class="submissions-list">
+      <div
+        *ngFor="let submission of submittedForms; trackBy: trackBySubmissionId"
+        class="submission-card"
+      >
+        <div class="submission-header">
+          <h4>{{ submission.name }}</h4>
+          <span class="timestamp"
+            >{{ submission.timestamp | date:'short' }}</span
+          >
+        </div>
+        <div class="submission-content">
+          <p><strong>Email:</strong> {{ submission.email }}</p>
+          <p><strong>Message:</strong> {{ submission.message }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

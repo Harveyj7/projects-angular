@@ -1,13 +1,21 @@
 import { Component } from '@angular/core';
-import { Navbar } from '../navbar/navbar';
 import { PROJECTS } from '../../../constants/projects';
-import { Header } from '../header/header';
 
 @Component({
   selector: 'app-languages',
-  imports: [Header],
-  templateUrl: './languages.html',
-  styleUrl: './languages.scss',
+  imports: [],
+  template: `<iframe
+    src="assets/languages.html"
+    width="100%"
+    height="600px"
+    frameborder="0"
+    sandbox="allow-scripts allow-same-origin allow-forms allow-downloads allow-popups"
+  ></iframe> `,
+  styles: `
+  iframe {
+    border: 1px solid #ccc;
+  }
+  `,
 })
 export class Languages {
   projects = PROJECTS;

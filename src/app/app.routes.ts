@@ -50,4 +50,10 @@ export const routes: Routes = [
     loadComponent: () =>
       import('./components/about/about').then((m) => m.About),
   },
+  {
+    path: 'contact',
+    pathMatch: 'full',
+    loadComponent: () =>
+      import('./components/contact/contact').then((m) => m.Contact),
+  },
 ];
