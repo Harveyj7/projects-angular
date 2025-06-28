@@ -1,0 +1,80 @@
+<div class="api-container">
+  <div class="header-section">
+    <h2>PostgreSQL Data Viewer</h2>
+    <p class="description">
+      Click the button below to view data from the PostgreSQL database
+    </p>
+  </div>
+
+  <div class="button-section">
+    <button
+      class="btn-primary-lg"
+      (click)="toggleDataDisplay()"
+      [disabled]="loading"
+    >
+      <span class="button-icon">📊</span>
+      {{ showData ? 'Hide PostgreSQL Data' : 'Click for PostgreSQL Data' }}
+      <span *ngIf="loading" class="spinner"></span>
+    </button>
+  </div>
+
+  <!-- Loading State -->
+  <div *ngIf="loading" class="loading-container">
+    <div class="loading-spinner"></div>
+    <p>Loading data from PostgreSQL...</p>
+  </div>
+
+  <!-- Error State -->
+  <div *ngIf="error && !loading" class="error-container">
+    <div class="error-icon">⚠️</div>
+    <p>{{ error }}</p>
+    <button class="retry-button" (click)="fetchTasks()">Retry</button>
+  </div>
+
+  <!-- Data Table -->
+  <div
+    *ngIf="showData && tasks.length > 0 && !loading && !error"
+    class="table-container"
+  >
+    <div class="table-header">
+      <h3>
+        Database Results ({{ tasks.length }} record{{ tasks.length === 1 ? '' :
+        's' }})
+      </h3>
+    </div>
+
+    <div class="table-wrapper">
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th *ngFor="let key of getObjectKeys(tasks[0])">
+              {{ key | titlecase }}
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr
+            *ngFor="let task of tasks; let i = index"
+            [class.even]="i % 2 === 0"
+          >
+            <td
+              *ngFor="let key of getObjectKeys(task)"
+              [attr.data-label]="key | titlecase"
+            >
+              {{ task[key] }}
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- No Data State -->
+  <div
+    *ngIf="showData && tasks.length === 0 && !loading && !error"
+    class="no-data-container"
+  >
+    <div class="no-data-icon">📭</div>
+    <p>No data available</p>
+  </div>
+</div>

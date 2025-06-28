@@ -32,12 +32,7 @@
                 "output": "assets"
               }
             ],
-            "styles": ["src/styles.scss", "src/styles/chatbot.scss"],
-            "server": "src/main.server.ts",
-            "outputMode": "server",
-            "ssr": {
-              "entry": "src/server.ts"
-            }
+            "styles": ["src/styles.scss", "src/styles/chatbot.scss"]
           },
           "configurations": {
             "production": {

@@ -7,13 +7,12 @@
   (mousemove)="onCarouselMouseMove($event)"
 >
   @for (project of projectsArray; track project.text; let i = $index) {
-  <div class="carousel-box">
+  <div
+    class="carousel-box"
+    (dblclick)="onCarouselBoxClick($event, project.href)"
+  >
     <h3>{{ project.text }}</h3>
-    <img
-      (dblclick)="onCarouselBoxDoubleClick(project.href)"
-      [src]="project.src"
-      [alt]="project.text"
-    />
+    <img [src]="project.src" [alt]="project.text" />
   </div>
   }
 </div>

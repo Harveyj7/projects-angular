@@ -18,6 +18,11 @@ export const routes: Routes = [
     loadComponent: () => import('./components/elwp/elwp').then((m) => m.Elwp),
   },
   {
+    path: 'api',
+    pathMatch: 'full',
+    loadComponent: () => import('./components/api/api').then((m) => m.Api),
+  },
+  {
     path: 'game',
     pathMatch: 'full',
     loadComponent: () => import('./components/game/game').then((m) => m.Game),

@@ -1,6 +1,6 @@
 <div class="contact-container">
   <div class="contact-form-section">
-    <h2>Contact Us</h2>
+    <h2>Contact Me</h2>
 
     <!-- Success Message -->
     <div *ngIf="submitSuccess" class="success-message">{{ submitMessage }}</div>
@@ -68,8 +68,7 @@
           placeholder="Enter your message"
           rows="5"
           [class.error]="messageField.invalid && messageField.touched"
-        >
-        </textarea>
+        ></textarea>
         <div
           *ngIf="messageField.invalid && messageField.touched"
           class="error-message"

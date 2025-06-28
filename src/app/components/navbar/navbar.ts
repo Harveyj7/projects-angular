@@ -9,6 +9,7 @@ import {
 } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 import { RouterLink } from '@angular/router';
+import { NAVBAR } from '../../../constants/navbar';
 
 @Component({
   selector: 'app-navbar',
@@ -18,8 +19,7 @@ import { RouterLink } from '@angular/router';
   styleUrl: './navbar.scss',
 })
 export class Navbar implements AfterViewInit {
-  @Input() projects: any;
-
+  navbar = NAVBAR;
   private triggers?: NodeListOf<HTMLLIElement>;
   private background?: HTMLElement | null;
   private about?: HTMLElement | null;

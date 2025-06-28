@@ -1,8 +1,8 @@
 export const PROJECTS = {
   lang: {
     text: 'Languages application',
-    href: 'languages',
-    // href: 'https://harveyj7.github.io/projects/languages.html',
+    // href: 'languages',
+    href: 'https://harveyj7.github.io/projects/languages.html',
     src: 'assets/images/languages.png',
   },
   elwp: {
@@ -15,6 +15,11 @@ export const PROJECTS = {
     text: 'Website project 2020',
     href: 'https://harveyj7.github.io/IMA/index.html',
     src: 'assets/images/imalogo.jpg',
+  },
+  api: {
+    text: 'API project',
+    href: 'api',
+    src: 'assets/images/api.png',
   },
   js1: {
     text: 'JavaScript game 1',
@@ -40,20 +45,5 @@ export const PROJECTS = {
     text: 'Group Business Design Project',
     href: 'gbdp',
     src: 'assets/images/OTD.png',
-  },
-  about: {
-    text: `I am a Software Engineer with 3+ years of experience in full-stack 
-              development, IT support, and legacy system migration. I have
-              developed expertise in Linux Bash, SQL, Angular, and other
-              front-end frameworks. These are several of my pet projects that I
-              have worked on in my spare time, most of the work is old so give
-              it some benefit of the doubt if possible!`,
-    href: 'about',
-    src: 'assets/images/harveysmall.jpg',
-  },
-  contact: {
-    text: '',
-    href: 'contact',
-    src: 'assets/images/contact.png',
   },
 };

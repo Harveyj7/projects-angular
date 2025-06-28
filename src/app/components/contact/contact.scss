@@ -1,16 +1,10 @@
 .contact-container {
-  max-width: 1200px;
+  max-width: 800px;
   margin: 0 auto;
   padding: 2rem;
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr;
   gap: 3rem;
-
-  @media (max-width: 768px) {
-    grid-template-columns: 1fr;
-    gap: 2rem;
-    padding: 1rem;
-  }
 }
 
 .contact-form-section {
@@ -136,12 +130,6 @@
     border-top-color: transparent;
     animation: spin 1s ease-in-out infinite;
     margin-right: 0.5rem;
-  }
-}
-
-@keyframes spin {
-  to {
-    transform: rotate(360deg);
   }
 }
 

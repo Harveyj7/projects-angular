@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { Navbar } from '../navbar/navbar';
 import { Title } from '../title/title';
-import { PROJECTS } from '../../../constants/projects';
 
 @Component({
   selector: 'app-header',
@@ -9,7 +8,7 @@ import { PROJECTS } from '../../../constants/projects';
   imports: [Navbar, Title],
   template: `
     <div class="header-container">
-      <app-navbar [projects]="projects"></app-navbar>
+      <app-navbar></app-navbar>
       <app-title></app-title>
     </div>
   `,
@@ -24,6 +23,4 @@ import { PROJECTS } from '../../../constants/projects';
     `,
   ],
 })
-export class Header {
-  projects = PROJECTS;
-}
+export class Header {}

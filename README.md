@@ -63,3 +63,14 @@ Angular CLI does not come with an end-to-end testing framework by default. You c
 ## Additional Resources
 
 For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+
+Postgres CMD initiation-
+
+cd "C:\Program Files\PostgreSQL\17\bin"
+initdb -D "C:\Users\harve\pgdata"
+pg_ctl -D ^"C^:^\Users^\harve^\pgdata^" -l logfile start
+
+"C:\Program Files\PostgreSQL\17\bin\pg_ctl.exe" -D "C:\Users\harve\pgdata" -l "C:\Users\harve\pglog.txt" start
+"C:\Program Files\PostgreSQL\17\bin\pg_ctl.exe" -D "C:\Users\harve\pgdata" status
+"C:\Program Files\PostgreSQL\17\bin\psql.exe" -U harve -d postgres
+"C:\Program Files\PostgreSQL\17\bin\psql.exe" -U postgres

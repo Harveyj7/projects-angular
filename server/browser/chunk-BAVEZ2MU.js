@@ -1,1 +1,0 @@
-import{Ka as p,La as o,Ta as l,xa as n}from"./chunk-BQ5PE2TB.js";var s=class t{static \u0275fac=function(e){return new(e||t)};static \u0275cmp=n({type:t,selectors:[["app-elwp"]],decls:2,vars:0,template:function(e,i){e&1&&(p(0,"p"),l(1,"elwp works!"),o())},encapsulation:2})};export{s as Elwp};

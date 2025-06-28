@@ -29,6 +29,7 @@ export class Carousel implements AfterViewInit {
   private isDown = false;
   private startX = 0;
   private scrollLeft = 0;
+  private hasDragged = false;
   public projectsArray: ProjectData[] = Object.values(PROJECTS);
 
   constructor(
@@ -47,6 +48,7 @@ export class Carousel implements AfterViewInit {
     if (!this.carouselRef?.nativeElement) return;
 
     this.isDown = true;
+    this.hasDragged = false;
     const carousel = this.carouselRef.nativeElement;
     carousel.classList.add('active');
     this.startX = e.pageX - carousel.offsetLeft;
@@ -61,6 +63,12 @@ export class Carousel implements AfterViewInit {
     const carousel = this.carouselRef.nativeElement;
     const x = e.pageX - carousel.offsetLeft;
     const walk = (x - this.startX) * 2; // Scroll speed multiplier
+
+    // If we've moved more than a few pixels, consider it a drag
+    if (Math.abs(walk) > 5) {
+      this.hasDragged = true;
+    }
+
     carousel.scrollLeft = this.scrollLeft - walk;
   }
 
@@ -72,7 +80,13 @@ export class Carousel implements AfterViewInit {
     this.resetCarousel();
   }
 
-  onCarouselBoxDoubleClick(href: string): void {
+  onCarouselBoxClick(event: MouseEvent, href: string): void {
+    // Prevent navigation if the user was dragging
+    if (this.hasDragged) {
+      event.preventDefault();
+      return;
+    }
+
     // Check if it's an external URL
     if (href.startsWith('http://') || href.startsWith('https://')) {
       // Open external URL in a new tab
@@ -85,6 +99,7 @@ export class Carousel implements AfterViewInit {
 
   private resetCarousel(): void {
     this.isDown = false;
+    this.hasDragged = false;
     this.carouselRef?.nativeElement?.classList.remove('active');
   }
 }

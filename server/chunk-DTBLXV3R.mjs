@@ -1,2 +1,0 @@
-import './polyfills.server.mjs';
-import{a as r}from"./chunk-273LAMOP.mjs";import{Ma as n,Na as o,Va as s,xa as t}from"./chunk-VTCCT4XR.mjs";import"./chunk-X2SEQXRR.mjs";var i=class a{projects=r;static \u0275fac=function(e){return new(e||a)};static \u0275cmp=t({type:a,selectors:[["app-languages"]],decls:2,vars:0,template:function(e,m){e&1&&(n(0,"p"),s(1,"languages works!"),o())},encapsulation:2})};export{i as Languages};
