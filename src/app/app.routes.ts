@@ -10,7 +10,13 @@ export const routes: Routes = [
     path: 'languages',
     pathMatch: 'full',
     loadComponent: () =>
-      import('./components/languages/languages').then((m) => m.Languages),
+      import('./components/nglanguages/nglanguages').then((m) => m.Languages),
+  },
+  {
+    path: 'material',
+    pathMatch: 'full',
+    loadComponent: () =>
+      import('./components/material/material').then((m) => m.Material),
   },
   {
     path: 'elwp',

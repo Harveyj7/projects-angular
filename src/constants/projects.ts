@@ -1,8 +1,8 @@
 export const PROJECTS = {
   lang: {
     text: 'Languages application',
-    // href: 'languages',
-    href: 'https://harveyj7.github.io/projects/languages.html',
+    href: 'languages',
+    // href: 'https://harveyj7.github.io/projects/languages.html',
     src: 'assets/images/languages.png',
   },
   elwp: {

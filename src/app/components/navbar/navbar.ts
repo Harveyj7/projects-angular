@@ -6,26 +6,62 @@ import {
   PLATFORM_ID,
   Inject,
   Input,
+  ViewChild,
+  QueryList,
+  ViewChildren,
 } from '@angular/core';
-import { isPlatformBrowser } from '@angular/common';
+import { isPlatformBrowser, CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { NAVBAR } from '../../../constants/navbar';
 
 @Component({
   selector: 'app-navbar',
   standalone: true,
-  imports: [RouterLink],
+  imports: [RouterLink, CommonModule],
   templateUrl: './navbar.html',
   styleUrl: './navbar.scss',
 })
 export class Navbar implements AfterViewInit {
   navbar = NAVBAR;
-  private triggers?: NodeListOf<HTMLLIElement>;
-  private background?: HTMLElement | null;
-  private about?: HTMLElement | null;
-  private arrow?: HTMLElement | null;
-  private nav?: HTMLElement | null;
-  private items?: NodeListOf<HTMLElement>;
+
+  // ViewChild references for DOM elements
+  @ViewChild('dropdownBackground', { static: false })
+  dropdownBackground!: ElementRef<HTMLElement>;
+  @ViewChild('about', { static: false }) about!: ElementRef<HTMLElement>;
+  @ViewChild('arrow', { static: false }) arrow!: ElementRef<HTMLElement>;
+  @ViewChild('nav', { static: false }) nav!: ElementRef<HTMLElement>;
+  @ViewChildren('menuItem') menuItems!: QueryList<ElementRef<HTMLElement>>;
+  @ViewChildren('triggerElement') triggerElements!: QueryList<
+    ElementRef<HTMLElement>
+  >;
+
+  // Component state
+  dropdownState = {
+    isVisible: false,
+    width: 0,
+    height: 0,
+    top: 0,
+    left: 0,
+  };
+
+  // Styles for dynamic elements
+  backgroundStyles: { [key: string]: string } = {
+    position: 'absolute',
+    background: 'white',
+    'border-radius': '4px',
+    'box-shadow':
+      '0 50px 100px rgba(50, 50, 93, 0.1), 0 15px 35px rgba(50, 50, 93, 0.15), 0 5px 15px rgba(0, 0, 0, 0.1)',
+    transition: 'all 0.3s, opacity 0.1s, transform 0.2s',
+    'transform-origin': '50% 0',
+    display: 'flex',
+    'justify-content': 'center',
+    opacity: '0',
+    'z-index': '5',
+    'pointer-events': 'none',
+  };
+  aboutStyles: { [key: string]: string } = {};
+  arrowStyles: { [key: string]: string } = {};
+  itemsOpacity = '1';
 
   constructor(
     private renderer: Renderer2,
@@ -37,43 +73,58 @@ export class Navbar implements AfterViewInit {
     if (!isPlatformBrowser(this.platformId)) {
       return;
     }
-    this.background = document.querySelector('.dropdownBackground');
-    this.about = document.querySelector('.about');
-    this.arrow = document.querySelector('.arrow');
-    this.nav = document.querySelector('nav');
-    this.items = document.querySelectorAll('.ul > li > a');
   }
 
   hideDropdown(): void {
-    console.log('handleLeave');
+    console.log('hideDropdown called');
 
-    const triggerElements = document.querySelectorAll('ul > li');
-    triggerElements.forEach((trigger) => {
-      trigger.classList.remove('trigger-enter');
-    });
+    // Reset component state
+    this.dropdownState.isVisible = false;
+    this.itemsOpacity = '1';
 
-    this.about?.style.removeProperty('margin-left');
-    this.arrow?.style.removeProperty('left');
-    this.items?.forEach((item) => {
-      item.style.removeProperty('opacity');
+    // Update background styles to hide
+    this.backgroundStyles = {
+      ...this.backgroundStyles,
+      opacity: '0',
+      'pointer-events': 'none',
+    };
+    this.aboutStyles = {};
+    this.arrowStyles = {};
+
+    console.log('Background styles after hide:', this.backgroundStyles);
+
+    // Remove trigger classes from all trigger elements
+    this.triggerElements?.forEach((trigger) => {
+      this.renderer.removeClass(trigger.nativeElement, 'trigger-enter');
+      console.log('Removed trigger-enter class from:', trigger.nativeElement);
     });
   }
 
   showDropdown(event: MouseEvent): void {
-    console.log('hovered', event);
-    // let displace = 0;
-    const trigger = (event.target as HTMLElement).closest('li') as HTMLElement;
+    if (!isPlatformBrowser(this.platformId)) {
+      return;
+    }
 
-    if (!trigger) return;
+    console.log('showDropdown called');
+    const trigger = (event.target as HTMLElement).closest('li') as HTMLElement;
+    if (!trigger) {
+      console.log('No trigger found');
+      return;
+    }
 
     const dropdown = trigger.querySelector('.dropdown') as HTMLElement;
+    if (!dropdown || !this.nav?.nativeElement) {
+      console.log('No dropdown or nav found', {
+        dropdown,
+        nav: this.nav?.nativeElement,
+      });
+      return;
+    }
 
-    if (!dropdown || !this.nav || !this.background) return;
-
+    // Calculate dropdown coordinates
     const dropdownCoords = dropdown.getBoundingClientRect();
-    trigger.classList.add('trigger-enter');
+    const navCoords = this.nav.nativeElement.getBoundingClientRect();
 
-    const navCoords = this.nav.getBoundingClientRect();
     const coords = {
       height: dropdownCoords.height,
       width: dropdownCoords.width,
@@ -81,25 +132,57 @@ export class Navbar implements AfterViewInit {
       left: dropdownCoords.left - navCoords.left,
     };
 
-    this.items?.forEach((item) => {
-      item.style.setProperty('opacity', '1');
-    });
+    console.log('Dropdown coords:', coords);
 
-    this.background.style.setProperty('width', `${coords.width}px`);
-    this.background.style.setProperty('height', `${coords.height}px`);
+    // Update component state
+    this.dropdownState = {
+      isVisible: true,
+      width: coords.width,
+      height: coords.height,
+      top: coords.top,
+      left: coords.left,
+    };
 
-    // if (
-    //   trigger.children[0]?.innerHTML === 'About Me' &&
-    //   document.body.offsetWidth < 600
-    // ) {
-    //   displace = 100;
-    //   this.arrow?.style.setProperty('left', '30px');
-    // }
+    // Update background styles to show
+    this.backgroundStyles = {
+      ...this.backgroundStyles,
+      width: `${coords.width}px`,
+      height: `${coords.height}px`,
+      transform: `translate(${coords.left}px, ${coords.top}px)`,
+      opacity: '1',
+      'pointer-events': 'auto',
+    };
 
-    this.background.style.setProperty(
-      'transform',
-      `translate(${coords.left}px, ${coords.top}px)`
-    );
-    this.about?.style.setProperty('margin-left', `${2 * 0}px`);
+    console.log('Background styles set:', this.backgroundStyles);
+
+    this.aboutStyles = {
+      'margin-left': '0px',
+    };
+
+    this.itemsOpacity = '1';
+
+    // Add trigger class
+    this.renderer.addClass(trigger, 'trigger-enter');
+    console.log('Added trigger-enter class to:', trigger);
+  }
+
+  // Helper method to get current background styles
+  getBackgroundStyles(): { [key: string]: string } {
+    return this.backgroundStyles;
+  }
+
+  // Helper method to get current about styles
+  getAboutStyles(): { [key: string]: string } {
+    return this.aboutStyles;
+  }
+
+  // Helper method to get current arrow styles
+  getArrowStyles(): { [key: string]: string } {
+    return this.arrowStyles;
+  }
+
+  // Helper method to get current items opacity
+  getItemsOpacity(): string {
+    return this.itemsOpacity;
   }
 }

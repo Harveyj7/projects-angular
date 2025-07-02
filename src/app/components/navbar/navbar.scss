@@ -12,7 +12,7 @@ nav ul {
 ul > li > a {
   margin: 20px;
   position: relative;
-  z-index: 2;
+  z-index: 1;
 }
 
 ul > li {
@@ -30,7 +30,7 @@ ul > li {
   transform: translateY(100px);
   will-change: opacity;
   display: none;
-  z-index: 3;
+  z-index: 10;
 }
 
 .dropdownBackground {
@@ -44,7 +44,8 @@ ul > li {
   display: flex;
   justify-content: center;
   opacity: 0;
-  z-index: 4;
+  z-index: 5;
+  pointer-events: none;
 }
 
 .trigger-enter .dropdown {
@@ -54,6 +55,7 @@ ul > li {
 
 .trigger-enter .dropdownBackground {
   opacity: 1;
+  pointer-events: auto;
 }
 
 .arrow {
@@ -63,7 +65,7 @@ ul > li {
   display: block;
   background: white;
   transform: translateY(-50%) rotate(45deg);
-  z-index: 2;
+  z-index: 6;
   top: 0;
 }
 

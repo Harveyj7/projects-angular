@@ -9,6 +9,9 @@ import {
 import { isPlatformBrowser } from '@angular/common';
 import { PROJECTS } from '../../../constants/projects';
 import { Router } from '@angular/router';
+import { MatIconModule } from '@angular/material/icon';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatButtonModule } from '@angular/material/button';
 
 interface ProjectData {
   text: string;
@@ -19,7 +22,7 @@ interface ProjectData {
 @Component({
   selector: 'app-carousel',
   standalone: true,
-  imports: [],
+  imports: [MatIconModule, MatButtonModule, MatDividerModule],
   templateUrl: './carousel.html',
   styleUrl: './carousel.scss',
 })

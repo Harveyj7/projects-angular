@@ -1,38 +1,98 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
 import { PROJECTS } from '../../../constants/projects';
+import { MatIconModule } from '@angular/material/icon';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatButtonModule } from '@angular/material/button';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+
+interface VocabularyWord {
+  italian: string;
+  english: string;
+}
+
+interface VocabularyData {
+  verbs: VocabularyWord[];
+  general: VocabularyWord[];
+}
 
 @Component({
   selector: 'app-nglanguages',
-  imports: [],
+  imports: [
+    MatIconModule,
+    MatButtonModule,
+    MatDividerModule,
+    CommonModule,
+    FormsModule,
+  ],
   templateUrl: './nglanguages.html',
   styleUrl: './nglanguages.scss',
 })
 export class Languages {
+  @ViewChild('fileInput') fileInput!: ElementRef<HTMLInputElement>;
+
   projects = PROJECTS;
 
-  private currentTestCategory: any = null;
-  private correctlyAnsweredWords = new Set();
-  private vocabulary: {
-    [key: string]: Array<{ italian: string; english: string }>;
-  } = {};
+  // Modal visibility state
+  showAddWordModal = false;
+  showTestWordsModal = false;
+
+  // Form data
+  italianWord = '';
+  englishWord = '';
+  answerInput = '';
+
+  // Test state
+  currentTestCategory: string | null = null;
+  currentTestWord: VocabularyWord | null = null;
+  testDisplayText = 'Select a category to start testing';
+  correctlyAnsweredWords = new Set<string>();
+
+  // Vocabulary data
+  vocabulary: VocabularyData = {
+    verbs: [],
+    general: [],
+  };
+
+  ngOnInit() {
+    this.initializeVocabulary();
+  }
+
+  initializeVocabulary() {
+    const storedVocabulary = localStorage.getItem('vocabulary');
+    this.vocabulary = storedVocabulary
+      ? JSON.parse(storedVocabulary)
+      : {
+          verbs: [],
+          general: [],
+        };
+  }
 
   openAddWordModal() {
-    const addWordModal = document.getElementById('addWordModal');
-    if (addWordModal) {
-      addWordModal.style.display = 'block';
-    }
+    this.showAddWordModal = true;
+  }
+
+  closeAddWordModal() {
+    this.showAddWordModal = false;
+    this.resetAddWordForm();
   }
 
   openTestWordsModal() {
-    const modal = document.getElementById('testWordsModal');
-    const testWord = document.getElementById('testWord');
-    const answer = document.getElementById('answer') as HTMLInputElement;
+    this.showTestWordsModal = true;
+    this.testDisplayText = 'Select a category to start testing';
+    this.answerInput = '';
+  }
 
-    if (modal && testWord && answer) {
-      modal.style.display = 'block';
-      testWord.textContent = 'Select a category to start testing';
-      answer.value = '';
-    }
+  closeTestWordsModal() {
+    this.showTestWordsModal = false;
+    this.currentTestCategory = null;
+    this.currentTestWord = null;
+  }
+
+  // Form management
+  resetAddWordForm() {
+    this.italianWord = '';
+    this.englishWord = '';
   }
 
   startTest(category: string) {
@@ -44,7 +104,12 @@ export class Languages {
   displayRandomWord() {
     if (!this.currentTestCategory) return;
 
-    const words = this.vocabulary[this.currentTestCategory].filter(
+    const categoryWords =
+      this.currentTestCategory === 'verbs'
+        ? this.vocabulary.verbs
+        : this.vocabulary.general;
+
+    const words = categoryWords.filter(
       (word) =>
         word.italian !== 'VERBS:' &&
         word.italian !== 'VOCAB:' &&
@@ -52,187 +117,100 @@ export class Languages {
     );
 
     if (words.length > 0) {
-      const randomWord = words[Math.floor(Math.random() * words.length)];
-      const testWordElement = document.getElementById('testWord');
-      if (testWordElement) {
-        testWordElement.textContent = randomWord.italian;
-        testWordElement.dataset['answer'] = randomWord.english;
-      }
+      this.currentTestWord = words[Math.floor(Math.random() * words.length)];
+      this.testDisplayText = this.currentTestWord.italian;
     } else {
       if (this.correctlyAnsweredWords.size > 0) {
-        // All words have been answered correctly
         alert(
           'Congratulations! You have completed all words in this category!'
         );
-        const testWordsModal = document.getElementById('testWordsModal');
-        if (testWordsModal) {
-          testWordsModal.style.display = 'none';
-        }
+        this.closeTestWordsModal();
       } else {
-        const testWordElement = document.getElementById('testWord');
-        if (testWordElement) {
-          testWordElement.textContent = `No ${this.currentTestCategory} available for testing`;
-        }
+        this.testDisplayText = `No ${this.currentTestCategory} available for testing`;
       }
     }
   }
 
-  // Initialize vocabulary from localStorage or create new
-  ngOnInit() {
-    const storedVocabulary = localStorage.getItem('vocabulary');
-    this.vocabulary = storedVocabulary
-      ? JSON.parse(storedVocabulary)
-      : {
-          verbs: [],
-          general: [],
-        };
-  }
-
   // Close modals when clicking outside
-  closeModalOnOutsideClick(event: MouseEvent) {
+  onModalBackdropClick(event: MouseEvent) {
     const target = event.target as HTMLElement;
     if (target.classList.contains('modal')) {
-      target.style.display = 'none';
+      if (target.id === 'addWordModal') {
+        this.closeAddWordModal();
+      } else if (target.id === 'testWordsModal') {
+        this.closeTestWordsModal();
+      }
     }
   }
 
   addWord(category: string) {
-    const italian: string = (
-      document.getElementById('italianWord') as HTMLInputElement
-    ).value.trim();
-    const english: string = (
-      document.getElementById('englishWord') as HTMLInputElement
-    ).value.trim();
+    const italian = this.italianWord.trim();
+    const english = this.englishWord.trim();
 
-    if (italian && english) {
-      // Check for duplicates in both tables
-      const isDuplicate = ['verbs', 'general'].some((cat: string) =>
-        this.vocabulary[cat].some(
-          (word: { italian: string; english: string }) =>
-            word.italian.toLowerCase() === italian.toLowerCase() ||
-            word.english.toLowerCase() === english.toLowerCase()
-        )
-      );
-
-      if (isDuplicate) {
-        alert('This word already exists in the vocabulary!');
-        return;
-      }
-
-      // Add new word to the appropriate category
-      const newWord = { italian, english };
-
-      if (category === 'VERBS') {
-        // If verbs array is empty, add header first
-        if (this.vocabulary['verbs'].length === 0) {
-          this.vocabulary['verbs'].push({ italian: 'VERBS:', english: '' });
-        }
-        // Insert new word after the header
-        this.vocabulary['verbs'].splice(1, 0, newWord);
-      } else {
-        // If general array is empty, add header first
-        if (this.vocabulary['general'].length === 0) {
-          this.vocabulary['general'].push({ italian: 'VOCAB:', english: '' });
-        }
-        // Insert new word after the header
-        this.vocabulary['general'].splice(1, 0, newWord);
-      }
-
-      this.updateTable(category);
-
-      // Clear inputs and close modal
-      const italianInput = document.getElementById(
-        'italianWord'
-      ) as HTMLInputElement;
-      const englishInput = document.getElementById(
-        'englishWord'
-      ) as HTMLInputElement;
-      const addWordModal = document.getElementById('addWordModal');
-
-      if (italianInput) italianInput.value = '';
-      if (englishInput) englishInput.value = '';
-      if (addWordModal) addWordModal.style.display = 'none';
-    }
-  }
-
-  updateTable(category: string) {
-    const table = document.getElementById(category + 'Table');
-    if (!table) return;
-
-    const words = this.vocabulary[category];
-    const tbody = table.getElementsByTagName('tbody')[0];
-
-    // Clear existing rows
-    tbody.innerHTML = '';
-
-    // Add header row if no words exist
-    if (words.length === 0) {
-      const headerRow = tbody.insertRow();
-      const italianCell = headerRow.insertCell(0);
-      const englishCell = headerRow.insertCell(1);
-      const deleteCell = headerRow.insertCell(2);
-      italianCell.textContent = 'Other language';
-      englishCell.textContent = 'English';
-      deleteCell.textContent = 'Actions';
-      italianCell.style.color = '#888';
-      englishCell.style.color = '#888';
-      deleteCell.style.color = '#888';
+    if (!italian || !english) {
+      alert('Please fill in both fields');
+      return;
     }
 
-    // Add rows for each word
-    words.forEach(
-      (word: { italian: string; english: string }, index: number) => {
-        const row = tbody.insertRow();
-        const italian_cell = row.insertCell(0);
-        const english_cell = row.insertCell(1);
-        const deleteCell = row.insertCell(2);
-        const deleteButton = document.createElement('button');
-        deleteCell.className = 'delete-btn-cell';
-        deleteButton.className = 'delete-btn';
-        italian_cell.textContent = word.italian;
-        english_cell.textContent = word.english;
-        deleteButton.textContent = '✖️';
-        deleteButton.onclick = () => this.deleteRow(category, index);
-        deleteCell.appendChild(deleteButton);
-      }
+    // Check for duplicates in both tables
+    const isDuplicate = Object.values(this.vocabulary).some((words) =>
+      words.some(
+        (word: VocabularyWord) =>
+          word.italian.toLowerCase() === italian.toLowerCase() ||
+          word.english.toLowerCase() === english.toLowerCase()
+      )
     );
 
-    // Update localStorage
-    localStorage.setItem('vocabulary', JSON.stringify(this.vocabulary));
+    if (isDuplicate) {
+      alert('This word already exists in the vocabulary!');
+      return;
+    }
+
+    // Add new word to the appropriate category
+    const newWord: VocabularyWord = { italian, english };
+
+    if (category === 'verbs') {
+      // If verbs array is empty, add header first
+      if (this.vocabulary.verbs.length === 0) {
+        this.vocabulary.verbs.push({ italian: 'VERBS:', english: '' });
+      }
+      // Insert new word after the header
+      this.vocabulary.verbs.splice(1, 0, newWord);
+    } else {
+      // If general array is empty, add header first
+      if (this.vocabulary.general.length === 0) {
+        this.vocabulary.general.push({ italian: 'VOCAB:', english: '' });
+      }
+      // Insert new word after the header
+      this.vocabulary.general.splice(1, 0, newWord);
+    }
+
+    this.saveVocabulary();
+    this.closeAddWordModal();
   }
 
   checkAnswer() {
-    const userAnswer =
-      (
-        document.getElementById('answer') as HTMLInputElement
-      )?.value.toLowerCase() ?? '';
-    const correctAnswer =
-      (document.getElementById('testWord') as HTMLElement)?.dataset?.[
-        'answer'
-      ]?.toLowerCase() ?? '';
-    const currentWord =
-      (document.getElementById('testWord') as HTMLElement)?.textContent ?? '';
+    if (!this.currentTestWord) return;
+
+    const userAnswer = this.answerInput.toLowerCase().trim();
+    const correctAnswer = this.currentTestWord.english.toLowerCase();
 
     if (userAnswer === correctAnswer) {
       alert('Correct!');
-      this.correctlyAnsweredWords.add(currentWord);
+      this.correctlyAnsweredWords.add(this.currentTestWord.italian);
     } else {
-      alert(`Incorrect. The correct answer is: ${correctAnswer}`);
+      alert(
+        `Incorrect. The correct answer is: ${this.currentTestWord.english}`
+      );
     }
 
     // Clear input and display new word
-    const answer = document.getElementById('answer') as HTMLInputElement;
-    if (answer) {
-      answer.value = '';
-    }
+    this.answerInput = '';
     this.displayRandomWord();
   }
 
   importCSV() {
-    const fileInput = document.getElementById('fileInput') as HTMLInputElement;
-    if (fileInput) {
-      fileInput.click();
-    }
+    this.fileInput.nativeElement.click();
   }
 
   handleFileSelect(event: Event) {
@@ -246,13 +224,12 @@ export class Languages {
       if (!result || typeof result !== 'string') return;
 
       const lines = result.split('\n');
-      let currentCategory = 'general'; // Default category
+      let currentCategory = 'general';
 
       lines.forEach((line: string) => {
         const trimmedLine = line.trim();
-        if (!trimmedLine) return; // Skip empty lines
+        if (!trimmedLine) return;
 
-        // Check for category headers
         if (trimmedLine.toUpperCase().includes('VERBS:')) {
           currentCategory = 'verbs';
           return;
@@ -261,29 +238,28 @@ export class Languages {
           return;
         }
 
-        // Process word pairs
         const [italian, english] = trimmedLine
           .split(',')
           .map((field: string) => field?.trim() || '');
-        if (!italian || !english) {
-          return; // Skip invalid lines silently
-        }
+        if (!italian || !english) return;
 
-        const isDuplicate = ['verbs', 'general'].some((cat: string) =>
-          this.vocabulary[cat].some(
-            (existingWord: { italian: string; english: string }) =>
+        const isDuplicate = Object.values(this.vocabulary).some((words) =>
+          words.some(
+            (existingWord: VocabularyWord) =>
               existingWord.italian.toLowerCase() === italian.toLowerCase() ||
               existingWord.english.toLowerCase() === english.toLowerCase()
           )
         );
 
         if (!isDuplicate) {
-          this.vocabulary[currentCategory].push({ italian, english });
+          this.vocabulary[currentCategory as keyof VocabularyData].push({
+            italian,
+            english,
+          });
         }
       });
 
-      this.updateTable('verbs');
-      this.updateTable('general');
+      this.saveVocabulary();
       alert('Import completed successfully!');
     };
     reader.readAsText(file);
@@ -292,36 +268,27 @@ export class Languages {
   async exportCSV() {
     let csvContent = '';
 
-    // Add verbs section if there are any verbs
-    if (this.vocabulary['verbs'].length > 0) {
+    if (this.vocabulary.verbs.length > 0) {
       csvContent += 'VERBS:\n';
-      this.vocabulary['verbs'].forEach(
-        (word: { italian: string; english: string }) => {
-          if (word.italian !== 'VERBS:') {
-            // Skip the header row
-            csvContent += `${word.italian},${word.english}\n`;
-          }
+      this.vocabulary.verbs.forEach((word) => {
+        if (word.italian !== 'VERBS:') {
+          csvContent += `${word.italian},${word.english}\n`;
         }
-      );
+      });
     }
 
-    // Add general vocabulary section if there are any words
-    if (this.vocabulary['general'].length > 0) {
+    if (this.vocabulary.general.length > 0) {
       csvContent += 'VOCAB:\n';
-      this.vocabulary['general'].forEach(
-        (word: { italian: string; english: string }) => {
-          if (word.italian !== 'VOCAB:') {
-            // Skip the header row
-            csvContent += `${word.italian},${word.english}\n`;
-          }
+      this.vocabulary.general.forEach((word) => {
+        if (word.italian !== 'VOCAB:') {
+          csvContent += `${word.italian},${word.english}\n`;
         }
-      );
+      });
     }
 
     const blob = new Blob([csvContent], { type: 'text/csv' });
 
     try {
-      // Check if File System Access API is supported
       if ('showSaveFilePicker' in window) {
         const handle = await (window as any).showSaveFilePicker({
           suggestedName: 'vocabulary.csv',
@@ -338,7 +305,6 @@ export class Languages {
         await writable.close();
         alert('Export completed successfully!');
       } else {
-        // Fallback for browsers that don't support File System Access API
         const url = URL.createObjectURL(blob);
         const a = document.createElement('a');
         a.href = url;
@@ -349,9 +315,9 @@ export class Languages {
         URL.revokeObjectURL(url);
         alert('Export completed successfully!');
       }
-    } catch (err) {
-      console.error('Error exporting CSV:', err);
-      alert('Error exporting to CSV file. Please try again.');
+    } catch (error) {
+      console.error('Export failed:', error);
+      alert('Export was cancelled or failed.');
     }
   }
 
@@ -361,22 +327,36 @@ export class Languages {
         'Are you sure you want to clear all vocabulary? This cannot be undone.'
       )
     ) {
-      this.vocabulary = {
-        verbs: [],
-        general: [],
-      };
-
-      localStorage.removeItem('vocabulary');
-
-      this.updateTable('verbs');
-      this.updateTable('general');
+      this.vocabulary = { verbs: [], general: [] };
+      this.saveVocabulary();
+      alert('All vocabulary has been cleared.');
     }
   }
 
   deleteRow(category: string, index: number) {
     if (confirm('Are you sure you want to delete this word?')) {
-      this.vocabulary[category].splice(index, 1);
-      this.updateTable(category);
+      this.vocabulary[category as keyof VocabularyData].splice(index, 1);
+      this.saveVocabulary();
     }
+  }
+
+  private saveVocabulary() {
+    localStorage.setItem('vocabulary', JSON.stringify(this.vocabulary));
+  }
+
+  // Helper methods for template
+  getFilteredWords(category: string): VocabularyWord[] {
+    return this.vocabulary[category as keyof VocabularyData] || [];
+  }
+
+  isHeaderRow(word: VocabularyWord): boolean {
+    return word.italian === 'VERBS:' || word.italian === 'VOCAB:';
+  }
+
+  hasWords(category: string): boolean {
+    return (
+      this.vocabulary[category as keyof VocabularyData] &&
+      this.vocabulary[category as keyof VocabularyData].length > 0
+    );
   }
 }
