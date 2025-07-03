@@ -5,6 +5,11 @@ export const PROJECTS = {
     // href: 'https://harveyj7.github.io/projects/languages.html',
     src: 'assets/images/languages.png',
   },
+  api: {
+    text: 'API project',
+    href: 'api',
+    src: 'assets/images/api.png',
+  },
   elwp: {
     text: 'ELWP - React component',
     // href: 'elwp',
@@ -15,11 +20,6 @@ export const PROJECTS = {
     text: 'Website project 2020',
     href: 'https://harveyj7.github.io/IMA/index.html',
     src: 'assets/images/imalogo.jpg',
-  },
-  api: {
-    text: 'API project',
-    href: 'api',
-    src: 'assets/images/api.png',
   },
   js1: {
     text: 'JavaScript game 1',

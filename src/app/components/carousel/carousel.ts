@@ -1,12 +1,4 @@
-import {
-  Component,
-  AfterViewInit,
-  ElementRef,
-  ViewChild,
-  PLATFORM_ID,
-  Inject,
-} from '@angular/core';
-import { isPlatformBrowser } from '@angular/common';
+import { Component, AfterViewInit, ElementRef, ViewChild } from '@angular/core';
 import { PROJECTS } from '../../../constants/projects';
 import { Router } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
@@ -35,16 +27,10 @@ export class Carousel implements AfterViewInit {
   private hasDragged = false;
   public projectsArray: ProjectData[] = Object.values(PROJECTS);
 
-  constructor(
-    @Inject(PLATFORM_ID) private platformId: Object,
-    private router: Router
-  ) {}
+  constructor(private router: Router) {}
 
   ngAfterViewInit(): void {
-    // Only setup mouse events in browser environment
-    if (!isPlatformBrowser(this.platformId)) {
-      return;
-    }
+    // Browser-specific setup can now run directly since we're not server-side rendered
   }
 
   onCarouselMouseDown(e: MouseEvent): void {

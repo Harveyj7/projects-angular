@@ -91,6 +91,12 @@ td {
   border: 1px solid #2c5530;
 }
 
+/* Actions column width to fit two buttons with 4px padding each side */
+td:last-child {
+  width: 93px;
+  padding: 0 4px;
+}
+
 .modal {
   display: flex;
   position: fixed;
@@ -134,14 +140,40 @@ td {
   border: black 1px solid;
 }
 
-@media (max-width: 1000px) {
-  body {
-    padding: 0 3%;
-  }
+/* Edit functionality styles */
+.edit-input {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #2c5530;
+  border-radius: 4px;
+  background-color: white;
+  font-size: 14px;
+  box-sizing: border-box;
+}
 
-  .tables-container {
-    width: 95%;
-  }
+.edit-input:focus {
+  outline: none;
+  border-color: #4caf50;
+  box-shadow: 0 0 5px rgba(76, 175, 80, 0.3);
+}
+
+.delete-buttons,
+.edit-buttons {
+  display: flex;
+  gap: 5px;
+  justify-content: center;
+  align-items: center;
+}
+
+.edit-buttons button {
+  min-width: 40px;
+}
+
+.edit-buttons .mat-mdc-mini-fab,
+.delete-buttons .mat-mdc-mini-fab {
+  width: 40px;
+  height: 40px;
+  background-color: rgb(157, 187, 155) !important;
 }
 
 @media (max-width: 550px) {
@@ -168,6 +200,25 @@ td {
   h2 {
     font-size: 1.3em;
     padding: 8px;
+  }
+
+  /* Edit functionality mobile styles */
+  .edit-input {
+    padding: 6px;
+    font-size: 12px;
+  }
+
+  .delete-buttons,
+  .edit-buttons {
+    gap: 3px;
+  }
+
+  .edit-buttons .mat-mdc-mini-fab,
+  .delete-buttons .mat-mdc-mini-fab {
+    width: 32px;
+    height: 32px;
+    transform: scale(0.8);
+    background-color: rgb(157, 187, 155) !important;
   }
 
   /* Smaller FAB on mobile */

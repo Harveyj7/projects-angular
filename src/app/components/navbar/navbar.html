@@ -2,31 +2,23 @@
   <div
     class="dropdownBackground"
     #dropdownBackground
-    [ngStyle]="getBackgroundStyles()"
+    [ngStyle]="dynamicBackgroundStyles"
   >
-    <span class="arrow" #arrow [ngStyle]="getArrowStyles()"></span>
+    <!-- <span class="arrow" #arrow></span> -->
   </div>
 
   <ul class="ul">
     <li #triggerElement>
-      <a
-        routerLink=""
-        class="btn-primary"
-        #menuItem
-        [style.opacity]="getItemsOpacity()"
-        >Home</a
-      >
+      <a routerLink="" class="btn-primary">Home</a>
     </li>
     <li #triggerElement>
       <a
         (mouseenter)="showDropdown($event)"
         (mouseleave)="hideDropdown()"
         class="btn-primary"
-        #menuItem
-        [style.opacity]="getItemsOpacity()"
         >About Me</a
       >
-      <div class="dropdown about" #about [ngStyle]="getAboutStyles()">
+      <div class="dropdown about" #about>
         <img [src]="navbar.about.src" />
         <p>{{ navbar.about.text }}</p>
       </div>
@@ -35,10 +27,8 @@
       <a
         (mouseenter)="showDropdown($event)"
         (mouseleave)="hideDropdown()"
-        routerLink="navbar.contact.href"
+        [routerLink]="navbar.contact.href"
         class="btn-primary"
-        #menuItem
-        [style.opacity]="getItemsOpacity()"
         >Contact</a
       >
       <div class="dropdown contact" (mouseleave)="hideDropdown()">

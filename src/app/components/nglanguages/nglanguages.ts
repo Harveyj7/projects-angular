@@ -42,6 +42,11 @@ export class Languages {
   englishWord = '';
   answerInput = '';
 
+  // Edit state
+  editingWord: { category: string; index: number } | null = null;
+  editItalianWord = '';
+  editEnglishWord = '';
+
   // Test state
   currentTestCategory: string | null = null;
   currentTestWord: VocabularyWord | null = null;
@@ -338,6 +343,81 @@ export class Languages {
       this.vocabulary[category as keyof VocabularyData].splice(index, 1);
       this.saveVocabulary();
     }
+  }
+
+  // Edit functionality methods
+  startEdit(category: string, index: number) {
+    const word = this.vocabulary[category as keyof VocabularyData][index];
+    if (this.isHeaderRow(word)) return; // Don't allow editing header rows
+
+    this.editingWord = { category, index };
+    this.editItalianWord = word.italian;
+    this.editEnglishWord = word.english;
+  }
+
+  cancelEdit() {
+    this.editingWord = null;
+    this.editItalianWord = '';
+    this.editEnglishWord = '';
+  }
+
+  saveEdit() {
+    if (!this.editingWord) return;
+
+    const italian = this.editItalianWord.trim();
+    const english = this.editEnglishWord.trim();
+
+    if (!italian || !english) {
+      alert('Please fill in both fields');
+      return;
+    }
+
+    const { category, index } = this.editingWord;
+    const currentWord =
+      this.vocabulary[category as keyof VocabularyData][index];
+
+    // Check for duplicates (excluding the current word being edited)
+    const isDuplicate = Object.values(this.vocabulary).some((words) =>
+      words.some((word: VocabularyWord, wordIndex: number) => {
+        // Skip the current word being edited
+        if (
+          category === 'verbs' &&
+          words === this.vocabulary.verbs &&
+          wordIndex === index
+        )
+          return false;
+        if (
+          category === 'general' &&
+          words === this.vocabulary.general &&
+          wordIndex === index
+        )
+          return false;
+
+        return (
+          word.italian.toLowerCase() === italian.toLowerCase() ||
+          word.english.toLowerCase() === english.toLowerCase()
+        );
+      })
+    );
+
+    if (isDuplicate) {
+      alert('This word already exists in the vocabulary!');
+      return;
+    }
+
+    // Update the word
+    currentWord.italian = italian;
+    currentWord.english = english;
+
+    this.saveVocabulary();
+    this.cancelEdit();
+  }
+
+  isEditing(category: string, index: number): boolean {
+    return (
+      this.editingWord?.category === category &&
+      this.editingWord?.index === index
+    );
   }
 
   private saveVocabulary() {
