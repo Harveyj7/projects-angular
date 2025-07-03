@@ -1,0 +1,1 @@
+import{Pa as a,gb as n,hb as o,wb as l}from"./chunk-WWLSA4OQ.js";var s=class t{static \u0275fac=function(e){return new(e||t)};static \u0275cmp=a({type:t,selectors:[["app-tableau"]],decls:2,vars:0,template:function(e,p){e&1&&(n(0,"p"),l(1,"tableau works!"),o())},encapsulation:2})};export{s as Tableau};
