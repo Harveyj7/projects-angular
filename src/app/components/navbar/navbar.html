@@ -50,5 +50,29 @@
         </div> -->
       </div>
     </li>
+
+    <!-- Authentication section -->
+    <li
+      #triggerElement
+      *ngIf="currentUser() as user; else loginSection"
+      class="auth-section"
+    >
+      <a
+        (mouseenter)="showDropdown($event)"
+        (mouseleave)="hideDropdown()"
+        class="btn-primary user-menu"
+        (click)="logout()"
+        >Logout</a
+      >
+      <div class="dropdown user-dropdown" (mouseleave)="hideDropdown()">
+        <p>Welcome, {{ user.email }}</p>
+      </div>
+    </li>
+
+    <ng-template #loginSection>
+      <li #triggerElement class="auth-section">
+        <a (click)="openLoginModal()" class="btn-primary login-btn">Login</a>
+      </li>
+    </ng-template>
   </ul>
 </nav>

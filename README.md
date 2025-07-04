@@ -74,3 +74,10 @@ pg_ctl -D ^"C^:^\Users^\harve^\pgdata^" -l logfile start
 "C:\Program Files\PostgreSQL\17\bin\pg_ctl.exe" -D "C:\Users\harve\pgdata" status
 "C:\Program Files\PostgreSQL\17\bin\psql.exe" -U harve -d postgres
 "C:\Program Files\PostgreSQL\17\bin\psql.exe" -U postgres
+
+BUILD & DEPLOY-
+ng build --configuration production --base-href=/projects-angular/
+Switch to <base href="/projects-angular/" />
+npx angular-cli-ghpages --dir=dist/projects/browser --no-silent
+
+ng deploy --base-href=/projects-angular/

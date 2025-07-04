@@ -5,20 +5,26 @@ import {
   ViewChild,
   QueryList,
   ViewChildren,
+  Signal,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import { MatButtonModule } from '@angular/material/button';
 import { NAVBAR } from '../../../constants/navbar';
+import { AuthService, User } from '../../services/auth.service';
+import { LoginModal } from '../login-modal/login-modal';
 
 @Component({
   selector: 'app-navbar',
   standalone: true,
-  imports: [RouterLink, CommonModule],
+  imports: [RouterLink, CommonModule, MatDialogModule, MatButtonModule],
   templateUrl: './navbar.html',
   styleUrl: './navbar.scss',
 })
 export class Navbar {
   navbar = NAVBAR;
+  currentUser: Signal<User | null>;
 
   @ViewChild('dropdownBackground', { static: false })
   dropdownBackground!: ElementRef<HTMLElement>;
@@ -39,7 +45,33 @@ export class Navbar {
 
   public dynamicBackgroundStyles: { [key: string]: string } = {};
 
-  constructor(private renderer: Renderer2, private el: ElementRef) {}
+  constructor(
+    private renderer: Renderer2,
+    private el: ElementRef,
+    private dialog: MatDialog,
+    private authService: AuthService
+  ) {
+    this.currentUser = this.authService.currentUser;
+  }
+
+  openLoginModal(): void {
+    this.hideDropdown();
+
+    const dialogRef = this.dialog.open(LoginModal, {
+      width: '400px',
+      data: {},
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+        console.log('User logged in successfully');
+      }
+    });
+  }
+
+  logout(): void {
+    this.authService.logout();
+  }
 
   showDropdown(event: MouseEvent): void {
     const trigger = (event.target as HTMLElement).closest('li') as HTMLElement;
