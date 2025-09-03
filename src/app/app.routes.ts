@@ -1,70 +1,83 @@
 import { Routes } from '@angular/router';
+import {Contact} from './components/contact/contact';
+import {Gbdp} from './components/gbdp/gbdp';
+import {Balance} from './components/balance/balance';
+import {Home} from './pages/home/home';
+import {Languages} from './components/nglanguages/nglanguages';
+import {Material} from './components/material/material';
+import {Elwp} from './components/elwp/elwp';
+import {Api} from './components/api/api';
+import {Game} from './components/game/game';
+import {Magnets} from './components/magnets/magnets';
+import {Tableau} from './components/tableau/tableau';
+import {Fyp} from './components/fyp/fyp';
+import {About} from './components/about/about';
 
 export const routes: Routes = [
   {
     path: '',
     pathMatch: 'full',
-    loadComponent: () => import('./pages/home/home').then((m) => m.Home),
+    component:Home
   },
   {
     path: 'languages',
     pathMatch: 'full',
-    loadComponent: () =>
-      import('./components/nglanguages/nglanguages').then((m) => m.Languages),
+    component: Languages,
   },
   {
     path: 'material',
     pathMatch: 'full',
-    loadComponent: () =>
-      import('./components/material/material').then((m) => m.Material),
+    component: Material,
   },
   {
     path: 'elwp',
     pathMatch: 'full',
-    loadComponent: () => import('./components/elwp/elwp').then((m) => m.Elwp),
+    component: Elwp,
   },
   {
     path: 'api',
     pathMatch: 'full',
-    loadComponent: () => import('./components/api/api').then((m) => m.Api),
+    component: Api,
   },
   {
     path: 'game',
     pathMatch: 'full',
-    loadComponent: () => import('./components/game/game').then((m) => m.Game),
+    component: Game,
   },
   {
     path: 'magnets',
     pathMatch: 'full',
-    loadComponent: () =>
-      import('./components/magnets/magnets').then((m) => m.Magnets),
+    component: Magnets,
   },
   {
     path: 'tableau',
     pathMatch: 'full',
-    loadComponent: () =>
-      import('./components/tableau/tableau').then((m) => m.Tableau),
+    component: Tableau,
   },
   {
     path: 'fyp',
     pathMatch: 'full',
-    loadComponent: () => import('./components/fyp/fyp').then((m) => m.Fyp),
+    component: Fyp,
   },
   {
     path: 'gbdp',
     pathMatch: 'full',
-    loadComponent: () => import('./components/gbdp/gbdp').then((m) => m.Gbdp),
+    component: Gbdp,
   },
   {
     path: 'about',
     pathMatch: 'full',
-    loadComponent: () =>
-      import('./components/about/about').then((m) => m.About),
+    component:About,
   },
   {
     path: 'contact',
     pathMatch: 'full',
-    loadComponent: () =>
-      import('./components/contact/contact').then((m) => m.Contact),
+    component: Contact
   },
+  {
+    path: 'balance',
+    pathMatch: 'full',
+    component: Balance
+  },
+
 ];

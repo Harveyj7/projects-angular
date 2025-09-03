@@ -8,7 +8,7 @@ import { Header } from './components/header/header';
   standalone: true,
   imports: [RouterOutlet, Header],
   template: `
-    <main>
+    <main class="main-content">
       <app-header></app-header>
       <router-outlet />
       <footer>Website developed by Harvey Jensen</footer>
@@ -16,12 +16,19 @@ import { Header } from './components/header/header';
   `,
   styles: [
     `
+      .main-content {
+        padding-bottom: 60px; /* Add space for the fixed footer */
+      }
+
       footer {
         text-align: center;
         padding: 10px;
         position: fixed;
         bottom: 0;
         width: 100%;
+        background-color: white; /* Add background to prevent transparency */
+        border-top: 1px solid #ddd; /* Optional: add a subtle border */
+        box-shadow: 0 -2px 4px rgba(0,0,0,0.1); /* Optional: add shadow */
       }
     `,
   ],

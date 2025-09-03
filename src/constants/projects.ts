@@ -2,7 +2,6 @@ export const PROJECTS = {
   lang: {
     text: 'Languages application',
     href: 'languages',
-    // href: 'https://harveyj7.github.io/projects/languages.html',
     src: 'assets/images/languages.png',
   },
   api: {
@@ -45,5 +44,10 @@ export const PROJECTS = {
     text: 'Group Business Design Project',
     href: 'gbdp',
     src: 'assets/images/OTD.png',
+  },
+  balance: {
+    text: 'Excel integration',
+    href: 'balance',
+    src: '',
   },
 };
