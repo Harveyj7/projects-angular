@@ -1,5 +1,6 @@
 import {
   Component,
+  effect,
   ElementRef,
   inject,
   QueryList,
@@ -46,26 +47,25 @@ export class Navbar {
 
   public dynamicBackgroundStyles: { [key: string]: string } = {};
   private renderer = inject(Renderer2);
-  private el = inject(ElementRef);
   private dialog = inject(MatDialog);
   private authService = inject(AuthService);
 
   constructor() {
     this.currentUser = this.authService.currentUser;
+    effect(() => {
+      if (this.currentUser()) {
+        console.log(this.currentUser() + 'Loggged in');
+      } else {
+        console.log('Not logged in');
+      }
+    });
   }
 
   openLoginModal(): void {
     this.hideDropdown();
-
-    const dialogRef = this.dialog.open(LoginModal, {
+    this.dialog.open(LoginModal, {
       width: '400px',
       data: {},
-    });
-
-    dialogRef.afterClosed().subscribe((result) => {
-      if (result) {
-        console.log('User logged in successfully');
-      }
     });
   }
 

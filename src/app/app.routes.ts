@@ -1,23 +1,24 @@
 import { Routes } from '@angular/router';
-import {Contact} from './components/contact/contact';
-import {Gbdp} from './components/gbdp/gbdp';
-import {Balance} from './components/balance/balance';
-import {Home} from './pages/home/home';
-import {Languages} from './components/nglanguages/nglanguages';
-import {Material} from './components/material/material';
-import {Elwp} from './components/elwp/elwp';
-import {Api} from './components/api/api';
-import {Game} from './components/game/game';
-import {Magnets} from './components/magnets/magnets';
-import {Tableau} from './components/tableau/tableau';
-import {Fyp} from './components/fyp/fyp';
-import {About} from './components/about/about';
+import { Contact } from './components/contact/contact';
+import { Gbdp } from './components/gbdp/gbdp';
+import { Balance } from './components/balance/balance';
+import { Home } from './pages/home/home';
+import { Languages } from './components/nglanguages/nglanguages';
+import { Material } from './components/material/material';
+import { Elwp } from './components/elwp/elwp';
+import { Api } from './components/api/api';
+import { Game } from './components/game/game';
+import { Magnets } from './components/magnets/magnets';
+import { Tableau } from './components/tableau/tableau';
+import { Fyp } from './components/fyp/fyp';
+import { About } from './components/about/about';
+import { authGuard } from './services/auth.guard';
 
 export const routes: Routes = [
   {
     path: '',
     pathMatch: 'full',
-    component:Home
+    component: Home,
   },
   {
     path: 'languages',
@@ -67,17 +68,17 @@ export const routes: Routes = [
   {
     path: 'about',
     pathMatch: 'full',
-    component:About,
+    component: About,
   },
   {
     path: 'contact',
     pathMatch: 'full',
-    component: Contact
+    component: Contact,
   },
   {
     path: 'balance',
     pathMatch: 'full',
-    component: Balance
+    component: Balance,
+    canActivate: [authGuard],
   },
-
 ];

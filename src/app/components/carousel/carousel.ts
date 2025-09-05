@@ -1,15 +1,16 @@
-import { Component, AfterViewInit, ElementRef, ViewChild } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  ViewChild,
+  inject,
+  Signal,
+} from '@angular/core';
 import { PROJECTS } from '../../../constants/projects';
 import { Router } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatButtonModule } from '@angular/material/button';
-
-interface ProjectData {
-  text: string;
-  href: string;
-  src: string;
-}
+import { AuthService, User } from '../../services/auth.service';
 
 @Component({
   selector: 'app-carousel',
@@ -18,24 +19,22 @@ interface ProjectData {
   templateUrl: './carousel.html',
   styleUrl: './carousel.scss',
 })
-export class Carousel implements AfterViewInit {
+export class Carousel {
   @ViewChild('carouselContainer', { static: false })
   private carouselRef!: ElementRef<HTMLElement>;
   private isDown = false;
   private startX = 0;
   private scrollLeft = 0;
   private hasDragged = false;
-  public projectsArray: ProjectData[] = Object.values(PROJECTS);
+  public projectsArray = Object.values(PROJECTS);
+  private authService = inject(AuthService);
+  currentUser: Signal<User | null>;
 
-  constructor(private router: Router) {}
-
-  ngAfterViewInit(): void {
-    // Browser-specific setup can now run directly since we're not server-side rendered
+  constructor(private router: Router) {
+    this.currentUser = this.authService.currentUser;
   }
 
   onCarouselMouseDown(e: MouseEvent): void {
-    if (!this.carouselRef?.nativeElement) return;
-
     this.isDown = true;
     this.hasDragged = false;
     const carousel = this.carouselRef.nativeElement;
@@ -52,7 +51,6 @@ export class Carousel implements AfterViewInit {
     const carousel = this.carouselRef.nativeElement;
     const x = e.pageX - carousel.offsetLeft;
     const walk = (x - this.startX) * 2; // Scroll speed multiplier
-
     // If we've moved more than a few pixels, consider it a drag
     if (Math.abs(walk) > 5) {
       this.hasDragged = true;
@@ -61,32 +59,16 @@ export class Carousel implements AfterViewInit {
     carousel.scrollLeft = this.scrollLeft - walk;
   }
 
-  onCarouselMouseLeave(): void {
-    this.resetCarousel();
-  }
-
-  onCarouselMouseUp(): void {
-    this.resetCarousel();
-  }
-
   onCarouselBoxClick(event: MouseEvent, href: string): void {
-    // Prevent navigation if the user was dragging
     if (this.hasDragged) {
       event.preventDefault();
       return;
     }
 
-    // Check if it's an external URL
-    if (href.startsWith('http://') || href.startsWith('https://')) {
-      // Open external URL in a new tab
-      window.open(href, '_blank');
-    } else {
-      // Navigate to internal route
-      this.router.navigate([href]);
-    }
+    this.router.navigate([href]);
   }
 
-  private resetCarousel(): void {
+  resetCarousel(): void {
     this.isDown = false;
     this.hasDragged = false;
     this.carouselRef?.nativeElement?.classList.remove('active');

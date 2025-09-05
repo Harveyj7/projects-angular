@@ -2,8 +2,8 @@
   #carouselContainer
   class="carousel-container"
   (mousedown)="onCarouselMouseDown($event)"
-  (mouseleave)="onCarouselMouseLeave()"
-  (mouseup)="onCarouselMouseUp()"
+  (mouseleave)="resetCarousel()"
+  (mouseup)="resetCarousel()"
   (mousemove)="onCarouselMouseMove($event)"
 >
   @for (project of projectsArray; track project.text; let i = $index) {
