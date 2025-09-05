@@ -1,15 +1,15 @@
 import { Component, AfterViewInit, PLATFORM_ID, Inject } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { isPlatformBrowser } from '@angular/common';
-import { Header } from './components/header/header';
+import {Navbar} from './components/navbar/navbar';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, Header],
+  imports: [RouterOutlet, Navbar],
   template: `
     <main class="main-content">
-      <app-header></app-header>
+      <app-navbar></app-navbar>
       <router-outlet />
       <footer>Website developed by Harvey Jensen</footer>
     </main>

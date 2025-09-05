@@ -33,7 +33,9 @@
       />
     </mat-form-field>
 
-    <div class="error" *ngIf="error">{{ error }}</div>
+    @if (error) {
+    <div class="error">{{ error }}</div>
+    }
 
     <div class="actions">
       <button
@@ -43,22 +45,24 @@
         [disabled]="!authForm.form.valid || isLoading"
         class="submit-btn"
       >
-        <span *ngIf="!isLoading"
-          >{{ isLoginMode ? 'Login' : 'Create Account' }}</span
-        >
-        <div *ngIf="isLoading" class="loading-content">
+        @if (!isLoading) {
+        <span> {{ isLoginMode ? 'Login' : 'Create Account' }} </span>
+        } @else {
+        <div class="loading-content">
           <mat-spinner diameter="20"></mat-spinner>
           <span
             >{{ isLoginMode ? 'Logging in...' : 'Creating account...' }}</span
           >
         </div>
+        }
       </button>
 
-      <div class="mode-toggle" *ngIf="!isLoading">
-        <span
-          >{{ isLoginMode ? "Don't have an account?" : "Already have an
-          account?" }}</span
-        >
+      @if (!isLoading) {
+      <div class="mode-toggle">
+        <span>
+          {{ isLoginMode ? "Don't have an account?" : "Already have an account?"
+          }}
+        </span>
         <button
           mat-button
           type="button"
@@ -68,6 +72,7 @@
           {{ isLoginMode ? 'Sign up' : 'Sign in' }}
         </button>
       </div>
+      }
     </div>
   </form>
 </div>

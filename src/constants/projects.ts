@@ -48,6 +48,6 @@ export const PROJECTS = {
   balance: {
     text: 'Excel integration',
     href: 'balance',
-    src: '',
+    src: 'assets/images/OTD.png',
   },
 };

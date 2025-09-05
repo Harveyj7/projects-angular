@@ -1,12 +1,15 @@
 {
   "name": "projects",
   "version": "0.0.0",
+  "type": "module",
   "scripts": {
     "ng": "ng",
     "start": "ng serve --proxy-config proxy.conf.json",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "lint": "eslint src/**/*.ts",
+    "lint:fix": "eslint src/**/*.ts --fix"
   },
   "private": true,
   "dependencies": {
@@ -31,14 +34,21 @@
     "zone.js": "~0.15.0"
   },
   "devDependencies": {
+    "@angular-eslint/eslint-plugin": "^20.2.0",
+    "@angular-eslint/eslint-plugin-template": "^20.2.0",
+    "@angular-eslint/template-parser": "^20.2.0",
     "@angular/build": "^20.0.3",
     "@angular/cli": "^20.0.3",
     "@angular/compiler-cli": "^20.0.0",
+    "@eslint/js": "^9.34.0",
     "@types/datatables.net": "^1.10.28",
     "@types/jasmine": "~5.1.0",
     "@types/jquery": "^3.5.33",
     "@types/node": "^20.17.19",
+    "@typescript-eslint/eslint-plugin": "^8.42.0",
+    "@typescript-eslint/parser": "^8.42.0",
     "angular-cli-ghpages": "^2.0.3",
+    "eslint": "^9.34.0",
     "jasmine-core": "~5.7.0",
     "karma": "~6.4.0",
     "karma-chrome-launcher": "~3.2.0",
@@ -46,6 +56,7 @@
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.1.0",
     "mimic-function": "^5.0.1",
+    "prettier": "^3.6.2",
     "typescript": "~5.8.2"
   }
 }

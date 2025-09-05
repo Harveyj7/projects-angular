@@ -1,11 +1,12 @@
 import {
   Component,
   ElementRef,
-  Renderer2,
-  ViewChild,
+  inject,
   QueryList,
-  ViewChildren,
+  Renderer2,
   Signal,
+  ViewChild,
+  ViewChildren,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
@@ -44,13 +45,12 @@ export class Navbar {
   };
 
   public dynamicBackgroundStyles: { [key: string]: string } = {};
+  private renderer = inject(Renderer2);
+  private el = inject(ElementRef);
+  private dialog = inject(MatDialog);
+  private authService = inject(AuthService);
 
-  constructor(
-    private renderer: Renderer2,
-    private el: ElementRef,
-    private dialog: MatDialog,
-    private authService: AuthService
-  ) {
+  constructor() {
     this.currentUser = this.authService.currentUser;
   }
 

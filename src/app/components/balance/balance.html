@@ -2,49 +2,41 @@
   <h1>Overview</h1>
 
   @if (loading) {
-    <div class="loading">
-      Loading balance data...
-    </div>
-  }
-
-  @if (error) {
-    <div class="error">
-      {{ error }}
-    </div>
-  }
-
-  @if (!loading && !error) {
-    <div class="chart-container">
-      <canvas
-        [attr.aria-label]="chartAriaLabel"
-        [data]="chartData"
-        [options]="chartOptions"
-        [type]="chartType"
-        [plugins]="chartPlugins"
-        baseChart
-        tabindex="0">
-      </canvas>
-    </div>
-<div class="table-container">
-
-      <table class="table-striped">
-        <thead>
+  <div class="loading">Loading balance data...</div>
+  } @if (error) {
+  <div class="error">{{ error }}</div>
+  } @if (!loading && !error) {
+  <div class="chart-container">
+    <canvas
+      [attr.aria-label]="chartAriaLabel"
+      [data]="chartData"
+      [options]="chartOptions"
+      [type]="chartType"
+      [plugins]="chartPlugins"
+      baseChart
+      tabindex="0"
+    >
+    </canvas>
+  </div>
+  <div class="table-container">
+    <table class="table-striped">
+      <thead>
         <tr>
           <th>Month</th>
           <th>Payment</th>
           <th>Cumulative</th>
         </tr>
-        </thead>
-        <tbody>
-          @for (item of balanceData; track item.Month) {
-            <tr>
-              <td>{{ item.Month }}</td>
-              <td>{{ formatCurrency(item.Payment) }}</td>
-              <td>{{ formatCurrency(item.Cumulative) }}</td>
-            </tr>
-          }
-        </tbody>
-      </table>
-</div>
+      </thead>
+      <tbody>
+        @for (item of balanceData; track item.Month) {
+        <tr>
+          <td>{{ formatDateLabel(item.Month) }}</td>
+          <td>{{ formatCurrency(item.Payment) }}</td>
+          <td>{{ formatCurrency(item.Cumulative) }}</td>
+        </tr>
+        }
+      </tbody>
+    </table>
+  </div>
   }
 </div>

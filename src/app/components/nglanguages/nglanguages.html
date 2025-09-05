@@ -23,56 +23,60 @@
     <table>
       <tbody>
         <!-- Header row when no data -->
-        <tr *ngIf="hasWords('verbs')">
+        @if (hasWords('verbs')) {
+        <tr>
           <td>Other language</td>
           <td>English</td>
           <td>Actions</td>
         </tr>
-        <tr *ngFor="let word of getFilteredWords('verbs'); let i = index">
+        } @for (word of getFilteredWords('verbs'); track word; let i = $index) {
+        <tr>
           <td>
+            @if (isEditing('verbs', i)) {
             <input
-              *ngIf="isEditing('verbs', i)"
               type="text"
               class="edit-input"
               [(ngModel)]="editItalianWord"
               placeholder="Italian"
             />
-            <span *ngIf="!isEditing('verbs', i)">{{ word.italian }}</span>
+            } @else {
+            <span>{{ word.italian }}</span>
+            }
           </td>
           <td>
+            @if (isEditing('verbs', i)) {
             <input
-              *ngIf="isEditing('verbs', i)"
               type="text"
               class="edit-input"
               [(ngModel)]="editEnglishWord"
               placeholder="English"
             />
-            <span *ngIf="!isEditing('verbs', i)">{{ word.english }}</span>
+            } @else {
+            <span>{{ word.english }}</span>
+            }
           </td>
           <td>
-            <div *ngIf="!isEditing('verbs', i)" class="delete-buttons">
+            @if (!isEditing('verbs', i)) {
+            <div class="delete-buttons">
               <button
                 matMiniFab
                 aria-label="Example icon button with a Edit icon"
               >
-                <mat-icon
-                  *ngIf="!isHeaderRow(word)"
-                  (click)="startEdit('verbs', i)"
-                  >edit</mat-icon
-                >
+                @if (!isHeaderRow(word)) {
+                <mat-icon (click)="startEdit('verbs', i)">edit</mat-icon>
+                }
               </button>
               <button
                 matMiniFab
                 aria-label="Example icon button with a delete icon"
               >
-                <mat-icon
-                  *ngIf="!isHeaderRow(word)"
-                  (click)="deleteRow('verbs', i)"
-                  >delete</mat-icon
-                >
+                @if (!isHeaderRow(word)) {
+                <mat-icon (click)="deleteRow('verbs', i)">delete</mat-icon>
+                }
               </button>
             </div>
-            <div *ngIf="isEditing('verbs', i)" class="edit-buttons">
+            } @else {
+            <div class="edit-buttons">
               <button matMiniFab aria-label="Save edit" (click)="saveEdit()">
                 <mat-icon>check</mat-icon>
               </button>
@@ -84,8 +88,10 @@
                 <mat-icon>close</mat-icon>
               </button>
             </div>
+            }
           </td>
         </tr>
+        }
       </tbody>
     </table>
   </div>
@@ -93,56 +99,61 @@
     <h2>Vocabulary</h2>
     <table>
       <tbody>
-        <tr *ngIf="hasWords('general')">
+        @if (hasWords('general')) {
+        <tr>
           <td>Other language</td>
           <td>English</td>
           <td>Actions</td>
         </tr>
-        <tr *ngFor="let word of getFilteredWords('general'); let i = index">
+        } @for (word of getFilteredWords('general'); track word; let i = $index)
+        {
+        <tr>
           <td>
+            @if (isEditing('general', i)) {
             <input
-              *ngIf="isEditing('general', i)"
               type="text"
               class="edit-input"
               [(ngModel)]="editItalianWord"
               placeholder="Italian"
             />
-            <span *ngIf="!isEditing('general', i)">{{ word.italian }}</span>
+            } @else {
+            <span>{{ word.italian }}</span>
+            }
           </td>
           <td>
+            @if (isEditing('general', i)) {
             <input
-              *ngIf="isEditing('general', i)"
               type="text"
               class="edit-input"
               [(ngModel)]="editEnglishWord"
               placeholder="English"
             />
-            <span *ngIf="!isEditing('general', i)">{{ word.english }}</span>
+            } @else {
+            <span>{{ word.english }}</span>
+            }
           </td>
           <td>
-            <div *ngIf="!isEditing('general', i)" class="delete-buttons">
+            @if (!isEditing('general', i)) {
+            <div class="delete-buttons">
               <button
                 matMiniFab
                 aria-label="Example icon button with a Edit icon"
               >
-                <mat-icon
-                  *ngIf="!isHeaderRow(word)"
-                  (click)="startEdit('general', i)"
-                  >edit</mat-icon
-                >
+                @if (!isHeaderRow(word)) {
+                <mat-icon (click)="startEdit('general', i)">edit</mat-icon>
+                }
               </button>
               <button
                 matMiniFab
                 aria-label="Example icon button with a delete icon"
               >
-                <mat-icon
-                  *ngIf="!isHeaderRow(word)"
-                  (click)="deleteRow('general', i)"
-                  >delete</mat-icon
-                >
+                @if (!isHeaderRow(word)) {
+                <mat-icon (click)="deleteRow('general', i)">delete</mat-icon>
+                }
               </button>
             </div>
-            <div *ngIf="isEditing('general', i)" class="edit-buttons">
+            } @else {
+            <div class="edit-buttons">
               <button matMiniFab aria-label="Save edit" (click)="saveEdit()">
                 <mat-icon>check</mat-icon>
               </button>
@@ -154,8 +165,10 @@
                 <mat-icon>close</mat-icon>
               </button>
             </div>
+            }
           </td>
         </tr>
+        }
       </tbody>
     </table>
   </div>
