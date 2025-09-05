@@ -26,30 +26,23 @@
     <li #triggerElement>
       <a
         (mouseenter)="showDropdown($event)"
-        (mouseleave)="hideDropdown()"
         [routerLink]="navbar.contact.href"
         class="btn-primary"
         >Contact</a
       >
-      <div class="dropdown contact" (mouseleave)="hideDropdown()">
+      <div
+        class="dropdown contact"
+        (mouseenter)="showDropdown($event)"
+        (mouseleave)="hideDropdown()"
+      >
         <p>
-          <!--          {{ navbar.contact.text }}-->
-          <!--          <b>07896145237</b>-->
-          <!--          <br /><br />-->
           Email me on:
           <b><a href="mailto:Harveyy7@gmail.com">Harveyy7&#64;gmail.com</a></b>
           <br />
         </p>
-        <!-- <div class="social-links">
-          <a href="https://github.com/Harveyj7">
-            <img [src]="'assets/images/iglogo.png'"
-          /></a>
-          <a href="https://www.linkedin.com/in/harvey-j-51650388/">
-            <img [src]="'assets/images/linkedin.png'"
-          /></a>
-        </div> -->
       </div>
     </li>
+
     <h1 class="title">Harvey - Projects</h1>
 
     <!-- Authentication section -->
