@@ -42,7 +42,28 @@
         </p>
       </div>
     </li>
-
+    @if (this.currentComponent === 'tableau') {
+    <li #triggerElement>
+      <a
+        (mouseenter)="showDropdown($event)"
+        (mouseleave)="hideDropdown()"
+        class="btn-primary"
+        >Information</a
+      >
+      <div class="dropdown about" #about>
+        <p>
+          As an application for a course delivered by the Information Lab, I
+          created a Data Visualisation dashboard on Tableau which display a
+          range of statistics on the ongoing Coronavirus pandemic, I chose this
+          topic for my visualisation because I was keen to obtain an worldwide
+          picture of the spread of Covid and visually inspect data which has
+          been analysed less such cases and deaths per capita. This project
+          allowed me to teach myself the new software- Tableau- and at the same
+          time, create clear timeline of the pandemic globally.
+        </p>
+      </div>
+    </li>
+    }
     <h1 class="title">Harvey - Projects</h1>
 
     <!-- Authentication section -->

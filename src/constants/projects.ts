@@ -11,8 +11,7 @@ export const PROJECTS = {
   },
   elwp: {
     text: 'ELWP - React component',
-    // href: 'elwp',
-    href: 'https://harveyj7.github.io/projects/elwp.html',
+    href: 'elwp',
     src: 'assets/images/waterworks_workshops.png',
   },
   ima: {

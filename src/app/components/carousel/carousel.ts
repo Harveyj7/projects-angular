@@ -65,7 +65,11 @@ export class Carousel {
       return;
     }
 
-    this.router.navigate([href]);
+    if (href.includes('.html')) {
+      window.location.href = href;
+    } else {
+      this.router.navigate([href]);
+    }
   }
 
   resetCarousel(): void {

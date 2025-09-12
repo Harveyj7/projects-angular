@@ -1,0 +1,31 @@
+@import url("https://fonts.googleapis.com/css2?family=Bree+Serif&display=swap");
+
+* {
+  font-family: "Bree Serif", serif;
+  /* border: red solid 2px; */
+}
+body {
+  background-color: rgb(157, 187, 155);
+  /* padding: 1% 5%; */
+}
+
+body::-webkit-scrollbar {
+  display: none;
+}
+
+#viz1613129136367 {
+  position: relative;
+}
+
+@media (max-width: 1100px) {
+  .title {
+    padding: 1% 5%;
+    font-size: 30px;
+  }
+}
+
+@media (max-width: 500px) {
+  #viz1613129136367 {
+    width: 100%;
+  }
+}

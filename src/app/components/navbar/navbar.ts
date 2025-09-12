@@ -10,12 +10,13 @@ import {
   ViewChildren,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterLink } from '@angular/router';
+import { NavigationEnd, Router, RouterLink } from '@angular/router';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
 import { NAVBAR } from '../../../constants/navbar';
 import { AuthService, User } from '../../services/auth.service';
 import { LoginModal } from '../login-modal/login-modal';
+import { filter } from 'rxjs';
 
 @Component({
   selector: 'app-navbar',
@@ -27,6 +28,7 @@ import { LoginModal } from '../login-modal/login-modal';
 export class Navbar {
   navbar = NAVBAR;
   currentUser: Signal<User | null>;
+  currentComponent: string = '';
 
   @ViewChild('dropdownBackground', { static: false })
   dropdownBackground!: ElementRef<HTMLElement>;
@@ -49,6 +51,7 @@ export class Navbar {
   private renderer = inject(Renderer2);
   private dialog = inject(MatDialog);
   private authService = inject(AuthService);
+  private router = inject(Router);
 
   constructor() {
     this.currentUser = this.authService.currentUser;
@@ -59,6 +62,13 @@ export class Navbar {
         console.log('Not logged in');
       }
     });
+    this.router.events
+      .pipe(filter((event) => event instanceof NavigationEnd))
+      .subscribe((event: NavigationEnd) => {
+        this.currentComponent = event.url.replace('/', '') || 'home';
+      });
+
+    this.currentComponent = this.router.url.replace('/', '') || 'home';
   }
 
   openLoginModal(): void {
