@@ -155,6 +155,14 @@ ul > li {
 }
 
 @media (max-width: 600px) {
+  nav ul {
+    flex-direction: row; // Stack items vertically on mobile
+    flex-wrap: wrap;
+  }
+  .auth-section {
+    order: -1; // This will move the auth section to the beginning
+  }
+
   ul > li > a {
     font-size: 15px;
     text-align: center;
@@ -162,29 +170,7 @@ ul > li {
     margin: 10px 5px;
   }
 
-  ul > li > a:hover {
-    transform: translateY(-1px);
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
-  }
-  .social {
-    margin: -10px;
-  }
   .about {
     min-width: 250px;
-  }
-  .about img {
-    display: none;
-    float: none;
-  }
-  .arrow {
-    position: absolute;
-  }
-
-  .auth-section {
-    margin-left: 0;
-
-    .user-dropdown {
-      min-width: 150px;
-    }
   }
 }

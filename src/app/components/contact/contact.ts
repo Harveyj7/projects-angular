@@ -1,103 +1,104 @@
-import { Component } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { Component, inject } from '@angular/core';
+import {
+  FormBuilder,
+  FormGroup,
+  Validators,
+  ReactiveFormsModule,
+} from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { MatButton } from '@angular/material/button';
+import { MatError, MatFormField, MatInput, MatLabel } from '@angular/material/input';
+import { MatIcon } from '@angular/material/icon';
 
-interface ContactFormData {
+
+interface ContactSubmission {
+  id: number;
+  timestamp: Date;
   name: string;
   email: string;
   message: string;
 }
 
-interface ContactSubmission extends ContactFormData {
-  id: number;
-  timestamp: Date;
-}
-
 @Component({
   selector: 'app-contact',
-  imports: [FormsModule, CommonModule],
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    MatButton,
+    MatIcon,
+    MatLabel,
+    MatFormField,
+    MatInput,
+    MatError,
+  ],
   templateUrl: './contact.html',
   styleUrl: './contact.scss',
 })
 export class Contact {
-  // Form model for ngModel binding
-  formData: ContactFormData = {
-    name: '',
-    email: '',
-    message: '',
-  };
-
-  // State to store submitted contact forms
+  contactForm: FormGroup;
   submittedForms: ContactSubmission[] = [];
-
-  // Form submission state
   isSubmitting = false;
   submitSuccess = false;
   submitMessage = '';
+  private formBuilder = inject(FormBuilder);
+
+  constructor() {
+    this.contactForm = this.formBuilder.group({
+      name: ['', [Validators.required]],
+      email: ['', [Validators.required, Validators.email]],
+      message: ['', [Validators.required]],
+    });
+  }
 
   onSubmit() {
-    if (this.isValidForm()) {
+    if (this.contactForm.valid) {
       this.isSubmitting = true;
 
-      // Simulate API call delay
       setTimeout(() => {
-        // Create submission object
         const submission: ContactSubmission = {
-          ...this.formData,
+          ...this.contactForm.value,
           id: Date.now(),
           timestamp: new Date(),
         };
 
-        // Add to state
         this.submittedForms.push(submission);
-
-        // Reset form
-        this.resetForm();
-
-        // Update UI state
+        this.contactForm.reset();
         this.isSubmitting = false;
         this.submitSuccess = true;
         this.submitMessage =
           'Thank you! Your message has been submitted successfully.';
 
-        // Clear success message after 5 seconds
-        setTimeout(() => {
-          this.submitSuccess = false;
-          this.submitMessage = '';
-        }, 5000);
+        // setTimeout(() => {
+        //   this.submitSuccess = false;
+        //   this.submitMessage = '';
+        // }, 5000);
       }, 1000);
     }
   }
 
-  private isValidForm(): boolean {
-    return !!(
-      this.formData.name.trim() &&
-      this.formData.email.trim() &&
-      this.formData.message.trim() &&
-      this.isValidEmail(this.formData.email)
-    );
-  }
-
-  private isValidEmail(email: string): boolean {
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return emailRegex.test(email);
-  }
-
-  private resetForm() {
-    this.formData = {
-      name: '',
-      email: '',
-      message: '',
-    };
-  }
-
-  // Method to clear all submissions (for demo purposes)
   clearSubmissions() {
     this.submittedForms = [];
   }
 
-  // TrackBy function for ngFor performance optimization
   trackBySubmissionId(index: number, submission: ContactSubmission): number {
     return submission.id;
+  }
+
+  isFieldInvalid(fieldName: string): boolean {
+    const field = this.contactForm.get(fieldName);
+    return !!(field && field.invalid && field.touched);
+  }
+
+  getFieldError(fieldName: string): string | null {
+    const field = this.contactForm.get(fieldName);
+    if (field && field.errors && field.touched) {
+      if (field.errors['required']) {
+        return `${fieldName.charAt(0).toUpperCase() + fieldName.slice(1)} is required`;
+      }
+      if (field.errors['email']) {
+        return 'Please enter a valid email address';
+      }
+    }
+    return null;
   }
 }

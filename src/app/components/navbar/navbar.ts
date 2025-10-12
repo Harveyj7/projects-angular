@@ -65,10 +65,10 @@ export class Navbar {
     this.router.events
       .pipe(filter((event) => event instanceof NavigationEnd))
       .subscribe((event: NavigationEnd) => {
-        this.currentComponent = event.url.replace('/', '') || 'home';
+        this.currentComponent = event.url.replace('/', '');
       });
 
-    this.currentComponent = this.router.url.replace('/', '') || 'home';
+    this.currentComponent = this.router.url.replace('/', '');
   }
 
   openLoginModal(): void {

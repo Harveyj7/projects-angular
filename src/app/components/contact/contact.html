@@ -1,88 +1,47 @@
-<div class="contact-container">
   <div class="contact-form-section">
     <h2>Contact Me</h2>
 
     @if (submitSuccess) {
     <div class="success-message">{{ submitMessage }}</div>
     }
-    <!-- Contact Form -->
-    <form #contactForm="ngForm" (ngSubmit)="onSubmit()" class="contact-form">
-      <!-- Name Field -->
-      <div class="form-group">
-        <label for="name">Name *</label>
-        <input
-          type="text"
-          id="name"
-          name="name"
-          [(ngModel)]="formData.name"
-          #nameField="ngModel"
-          required
-          class="form-control"
-          placeholder="Enter your full name"
-          [class.error]="nameField.invalid && nameField.touched"
-        />
-        @if (nameField.invalid && nameField.touched) {
-        <div class="error-message">Name is required</div>
-        }
-      </div>
+    <form [formGroup]="contactForm" (ngSubmit)="onSubmit()" class="contact-form">
 
-      <!-- Email Field -->
-      <div class="form-group">
-        <label for="email">Email *</label>
-        <input
-          type="email"
-          id="email"
-          name="email"
-          [(ngModel)]="formData.email"
-          #emailField="ngModel"
-          required
-          email
-          class="form-control"
-          placeholder="Enter your email address"
-          [class.error]="emailField.invalid && emailField.touched"
-        />
-        @if (emailField.invalid && emailField.touched) {
-        <div class="error-message">
-          @if (emailField.errors?.['required']) {
-          <span>Email is required</span>
-          } @if (emailField.errors?.['email']) {
-          <span>Please enter a valid email address</span>
-          }
-        </div>
+      <mat-form-field appearance="outline" class="form-group">
+        <mat-label>Your Name</mat-label>
+        <input matInput formControlName="name" placeholder="John Doe">
+        <mat-icon matPrefix>person</mat-icon>
+        @if(contactForm.get('name')?.hasError('required') && contactForm.get('name')?.touched){
+        <mat-error>Name is required.</mat-error>
         }
-      </div>
+      </mat-form-field>
 
-      <!-- Message Field -->
-      <div class="form-group">
-        <label for="message">Message *</label>
-        <textarea
-          id="message"
-          name="message"
-          [(ngModel)]="formData.message"
-          #messageField="ngModel"
-          required
-          class="form-control"
-          placeholder="Enter your message"
-          rows="5"
-          [class.error]="messageField.invalid && messageField.touched"
-        ></textarea>
-        @if (messageField.invalid && messageField.touched) {
-        <div class="error-message">Message is required</div>
+      <mat-form-field appearance="outline" class="form-group">
+        <mat-label>Email Address</mat-label>
+        <input matInput formControlName="email" placeholder="example@domain.com">
+        <mat-icon matPrefix>email</mat-icon>
+        @if(contactForm.get('email')?.hasError('required') && contactForm.get('email')?.touched){
+          <mat-error>Email is required.</mat-error>
         }
-      </div>
+        @if(contactForm.get('email')?.hasError('email') && contactForm.get('email')?.touched){
+          <mat-error>Please enter a valid email.</mat-error>
+        }
+      </mat-form-field>
 
-      <!-- Submit Button -->
-      <div class="form-actions">
-        <button
-          type="submit"
-          class="submit-btn"
-          [disabled]="contactForm.invalid || isSubmitting"
-        >
-          @if (isSubmitting) {
-          <span class="loading-spinner"></span>
-          } {{ isSubmitting ? 'Submitting...' : 'Send Message' }}
-        </button>
-      </div>
+      <mat-form-field appearance="outline">
+        <mat-label>Your Message</mat-label>
+        <textarea matInput formControlName="message" rows="4"></textarea>
+        @if(contactForm.get('message')?.hasError('required') && contactForm.get('message')?.touched){
+          <mat-error>Message is required.</mat-error>
+        }
+      </mat-form-field>
+
+      <button
+        mat-raised-button
+        color="primary"
+        type="submit"
+        [disabled]="contactForm.invalid">
+        Send Message 🚀
+      </button>
     </form>
   </div>
 
@@ -91,7 +50,7 @@
   <div class="submissions-section">
     <div class="submissions-header">
       <h3>Submitted Forms (State Demo)</h3>
-      <button class="clear-btn" (click)="clearSubmissions()">Clear All</button>
+      <button matButton="filled" (click)="clearSubmissions()">Clear All</button>
     </div>
 
     <div class="submissions-list">
@@ -99,10 +58,8 @@
       submission)) {
       <div class="submission-card">
         <div class="submission-header">
-          <h4>{{ submission.name }}</h4>
-          <span class="timestamp"
-            >{{ submission.timestamp | date:'short' }}</span
-          >
+          <h3>{{ submission.name }}</h3>
+          <span class="timestamp">{{ submission.timestamp | date:'short' }}</span>
         </div>
         <div class="submission-content">
           <p><strong>Email:</strong> {{ submission.email }}</p>
@@ -113,4 +70,3 @@
     </div>
   </div>
   }
-</div>
