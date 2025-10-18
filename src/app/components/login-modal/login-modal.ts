@@ -1,5 +1,5 @@
 import { Component, Inject } from '@angular/core';
-import { CommonModule } from '@angular/common';
+
 import { FormsModule } from '@angular/forms';
 import {
   MatDialogRef,
@@ -16,14 +16,13 @@ import { AuthService } from '../../services/auth.service';
   selector: 'app-login-modal',
   standalone: true,
   imports: [
-    CommonModule,
     FormsModule,
     MatDialogModule,
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
-    MatProgressSpinnerModule,
-  ],
+    MatProgressSpinnerModule
+],
   templateUrl: './login-modal.html',
   styleUrl: './login-modal.scss',
 })

@@ -1,13 +1,10 @@
 import {
   Component,
   effect,
-  ElementRef,
   inject,
-  QueryList,
-  Renderer2,
+  signal,
   Signal,
-  ViewChild,
-  ViewChildren,
+  WritableSignal,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NavigationEnd, Router, RouterLink } from '@angular/router';
@@ -17,11 +14,21 @@ import { NAVBAR } from '../../../constants/navbar';
 import { AuthService, User } from '../../services/auth.service';
 import { LoginModal } from '../login-modal/login-modal';
 import { filter } from 'rxjs';
-
+import { MatIcon } from '@angular/material/icon';
+interface PopoverState {
+  show: WritableSignal<boolean>;
+  content: WritableSignal<string>;
+}
 @Component({
   selector: 'app-navbar',
   standalone: true,
-  imports: [RouterLink, CommonModule, MatDialogModule, MatButtonModule],
+  imports: [
+    RouterLink,
+    CommonModule,
+    MatDialogModule,
+    MatButtonModule,
+    MatIcon,
+  ],
   templateUrl: './navbar.html',
   styleUrl: './navbar.scss',
 })
@@ -29,26 +36,19 @@ export class Navbar {
   navbar = NAVBAR;
   currentUser: Signal<User | null>;
   currentComponent: string = '';
+  aboutText: string = this.navbar.about.text;
+  infoText: string = this.navbar.information.text;
+  contactText: string = this.navbar.contact.text;
 
-  @ViewChild('dropdownBackground', { static: false })
-  dropdownBackground!: ElementRef<HTMLElement>;
-  @ViewChild('about', { static: false }) about!: ElementRef<HTMLElement>;
-  @ViewChild('arrow', { static: false }) arrow!: ElementRef<HTMLElement>;
-  @ViewChild('nav', { static: false }) nav!: ElementRef<HTMLElement>;
-  @ViewChildren('triggerElement') triggerElements!: QueryList<
-    ElementRef<HTMLElement>
-  >;
-
-  private dropdownState = {
+  initialDropdownState = signal({
     isVisible: false,
     width: 0,
     height: 0,
     top: 0,
     left: 0,
-  };
+  });
+  dropdownState: any = signal({});
 
-  public dynamicBackgroundStyles: { [key: string]: string } = {};
-  private renderer = inject(Renderer2);
   private dialog = inject(MatDialog);
   private authService = inject(AuthService);
   private router = inject(Router);
@@ -67,12 +67,10 @@ export class Navbar {
       .subscribe((event: NavigationEnd) => {
         this.currentComponent = event.url.replace('/', '');
       });
-
     this.currentComponent = this.router.url.replace('/', '');
   }
 
   openLoginModal(): void {
-    this.hideDropdown();
     this.dialog.open(LoginModal, {
       width: '400px',
       data: {},
@@ -83,41 +81,39 @@ export class Navbar {
     this.authService.logout();
   }
 
-  showDropdown(event: MouseEvent): void {
-    const trigger = (event.target as HTMLElement).closest('li') as HTMLElement;
-    const dropdown = trigger.querySelector('.dropdown') as HTMLElement;
-    const dropdownCoords = dropdown.getBoundingClientRect();
-    const navCoords = this.nav.nativeElement.getBoundingClientRect();
-    const coords = {
-      height: dropdownCoords.height,
-      width: dropdownCoords.width,
-      top: dropdownCoords.top - navCoords.top,
-      left: dropdownCoords.left - navCoords.left,
-    };
+  aboutmeState: PopoverState = {
+    show: signal(false),
+    content: signal(this.aboutText),
+  };
+  infoState: PopoverState = {
+    show: signal(false),
+    content: signal(this.infoText),
+  };
 
-    this.dropdownState = {
-      isVisible: true,
-      width: coords.width,
-      height: coords.height,
-      top: coords.top,
-      left: coords.left,
-    };
 
-    this.dynamicBackgroundStyles = {
-      width: `${coords.width}px`,
-      height: `${coords.height}px`,
-      transform: `translate(${coords.left}px, ${coords.top}px)`,
-      opacity: '1',
-    };
+  contactState: PopoverState = {
+    show: signal(false),
+    content: signal(this.contactText),
+  };
 
-    this.renderer.addClass(trigger, 'trigger-enter');
+
+  showPopover(state: PopoverState): void {
+    console.log(state.content());
+    state.content.set(state.content());
+    state.show.set(true);
   }
 
-  hideDropdown(): void {
-    this.dropdownState.isVisible = false;
-    this.dynamicBackgroundStyles = { opacity: '0' };
-    this.triggerElements?.forEach((trigger) => {
-      this.renderer.removeClass(trigger.nativeElement, 'trigger-enter');
-    });
+  hidePopover(state: PopoverState): void {
+    state.show.set(false);
   }
+
 }
+
+
+
+
+
+
+
+
+

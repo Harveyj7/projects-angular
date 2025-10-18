@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { CommonModule } from '@angular/common';
+
 import { BaseChartDirective } from 'ng2-charts';
 import { ChartConfiguration, ChartData } from 'chart.js';
 import DataLabelsPlugin from 'chartjs-plugin-datalabels';
@@ -46,7 +46,7 @@ interface ApiResponse {
 
 @Component({
   selector: 'app-balance',
-  imports: [CommonModule, BaseChartDirective],
+  imports: [BaseChartDirective],
   templateUrl: './balance.html',
   styleUrls: ['./balance.scss'],
 })

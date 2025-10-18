@@ -19,41 +19,6 @@ ul > li {
   position: relative;
 }
 
-.dropdown {
-  opacity: 0;
-  position: absolute;
-  overflow: hidden;
-  padding: 20px;
-  top: -20px;
-  border-radius: 2px;
-  transition: all 0.5s;
-  transform: translateY(100px);
-  will-change: opacity;
-  display: none;
-  z-index: -1;
-  pointer-events: none;
-}
-
-.dropdownBackground {
-  position: absolute;
-  background: white;
-  border-radius: 4px;
-  box-shadow:
-    0 50px 100px rgba(50, 50, 93, 0.1),
-    0 15px 35px rgba(50, 50, 93, 0.15),
-    0 5px 15px rgba(0, 0, 0, 0.1);
-  transition:
-    all 0.3s,
-    opacity 0.1s,
-    transform 0.2s;
-  transform-origin: 50% 0;
-  display: flex;
-  justify-content: center;
-  opacity: 0;
-  z-index: 5;
-  pointer-events: none;
-}
-
 .trigger-enter .dropdown {
   display: block;
   opacity: 1;
@@ -152,6 +117,37 @@ ul > li {
       margin-top: 10px;
     }
   }
+}
+
+
+.button-base {
+  cursor: pointer;
+}
+
+.popover-dialog {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-20%);
+  padding: 1rem;
+  border-radius: 0.5rem;
+  z-index: 10;
+  opacity: 1;
+  background-color: white;
+  border: 1px solid black;
+}
+
+.popover-dialog::before {
+  content: '';
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 0;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-bottom: 10px solid;
 }
 
 @media (max-width: 600px) {

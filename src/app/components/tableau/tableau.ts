@@ -26,7 +26,6 @@ export class Tableau implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.initializeTableauViz();
-    this.setupNavBarHandlers();
   }
 
   ngOnDestroy(): void {
@@ -62,36 +61,11 @@ export class Tableau implements OnInit, OnDestroy {
     }
   }
 
-  private setupNavBarHandlers(): void {
-    // Get navigation elements
-    this.trigger = document.querySelector('.cool') as HTMLElement;
-    this.background = document.querySelector(
-      '.dropdownBackground',
-    ) as HTMLElement;
-    this.nav = document.querySelector('.top') as HTMLElement;
 
-    if (this.trigger) {
-      this.link = this.trigger.querySelector('a') as HTMLElement;
-
-      if (this.link) {
-        // Add event listeners
-        this.link.addEventListener('mouseenter', this.handleEnter.bind(this));
-        this.link.addEventListener('mouseleave', this.handleLeave.bind(this));
-      }
-    }
-  }
 
   private handleEnter(): void {
     if (!this.trigger || !this.background || !this.nav || !this.divElement)
       return;
-
-    this.trigger.classList.add('trigger-enter');
-
-    setTimeout(() => {
-      if (this.trigger?.classList.contains('trigger-enter')) {
-        this.trigger.classList.add('trigger-enter-active');
-      }
-    }, 150);
 
     this.background.classList.add('open');
     this.divElement.style.setProperty('opacity', '0.1');
