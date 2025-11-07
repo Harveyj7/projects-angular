@@ -56,11 +56,15 @@ export class Navbar {
     content: signal(this.contactText),
   };
 
+  loginState: PopoverState = {
+    show: signal(false),
+    content: signal(this.aboutText),
+  };
   constructor() {
     this.currentUser = this.authService.currentUser;
     effect(() => {
       if (this.currentUser()) {
-        console.log(this.currentUser() + 'Loggged in');
+        console.log(this.currentUser() + 'Logged in');
       } else {
         console.log('Not logged in');
       }

@@ -41,9 +41,25 @@
     }
     <h1 class="title">{{this.currentComponent}}</h1>
     <h1 class="title">Harvey - Projects</h1>
+    @if (currentUser()) {
     <li class="auth-section">
-      <a (click)="openLoginModal()" class="btn-primary login-btn">Login</a>
+      <a
+          (mouseenter)="showPopover(loginState)"
+          (mouseleave)="hidePopover(loginState)"
+          class="btn-primary login-btn"
+          (click)="logout()"
+        >Logout</a>
     </li>
+<!--      @if (loginState.show()){-->
+<!--        <div class="user-dropdown" >-->
+<!--          <p>Welcome, {{ currentUser()?.email }}</p>-->
+<!--        </div>-->
+<!--      }-->
+    } @else {
+    <li class="auth-section">
+        <a (click)="openLoginModal()" class="btn-primary login-btn">Login</a>
+    </li>
+    }
 
   </ul>
 </nav>
