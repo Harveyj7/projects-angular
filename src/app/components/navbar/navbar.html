@@ -1,5 +1,4 @@
-<nav class="nav">
-
+<nav>
   <ul class="ul">
     <li >
       <a routerLink="" class="btn-primary">Home</a>
@@ -7,9 +6,9 @@
     <li >
       <a (mouseenter)="showPopover(aboutmeState)"
          (mouseleave)="hidePopover(aboutmeState)"
-        class="btn-primary button-base"> About Me </a>
+        class="btn-primary"> About Me </a>
       @if (aboutmeState.show()){
-        <div class="about popover-dialog">
+        <div class="mid-width popover-dialog">
           <img [src]="navbar.about.src" />
           {{aboutmeState.content()}}
         </div>
@@ -18,9 +17,9 @@
     <li >
       <a (mouseenter)="showPopover(contactState)"
          (mouseleave)="hidePopover(contactState)" [routerLink]="navbar.contact.href"
-         class="btn-primary button-base"> Contact </a>
+         class="btn-primary "> Contact </a>
       @if (contactState.show()){
-        <div class="contact popover-dialog ">
+        <div class="popover-dialog">
           {{contactState.content()}}
           <a href="mailto:Harveyy7@gmail.com">Harveyy7&#64;gmail.com</a>
         </div>
@@ -30,11 +29,11 @@
       <li >
         <a (mouseenter)="showPopover(infoState)"
           (mouseleave)="hidePopover(infoState)"
-          class="btn-primary button-base">
+          class="btn-primary ">
           Information
         </a>
         @if (infoState.show()){
-        <div class="contact popover-dialog ">
+        <div class="mid-width popover-dialog">
           <p>{{ infoText }}</p>
         </div>
         }

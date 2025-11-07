@@ -1,9 +1,7 @@
 import {
   Component,
   ElementRef,
-  OnDestroy,
   OnInit,
-  Renderer2,
   ViewChild,
 } from '@angular/core';
 
@@ -13,27 +11,14 @@ import {
   templateUrl: './tableau.html',
   styleUrl: './tableau.scss',
 })
-export class Tableau implements OnInit, OnDestroy {
+export class Tableau implements OnInit {
   @ViewChild('viz', { static: true }) vizElement!: ElementRef<HTMLDivElement>;
 
-  private trigger?: HTMLElement;
-  private link?: HTMLElement;
-  private background?: HTMLElement;
-  private nav?: HTMLElement;
   private divElement?: HTMLElement | null;
 
-  constructor(private renderer: Renderer2) {}
 
   ngOnInit(): void {
     this.initializeTableauViz();
-  }
-
-  ngOnDestroy(): void {
-    // Clean up event listeners
-    if (this.link) {
-      this.link.removeEventListener('mouseenter', this.handleEnter.bind(this));
-      this.link.removeEventListener('mouseleave', this.handleLeave.bind(this));
-    }
   }
 
   private initializeTableauViz(): void {
@@ -59,46 +44,5 @@ export class Tableau implements OnInit, OnDestroy {
         vizElement.parentNode.insertBefore(scriptElement, vizElement);
       }
     }
-  }
-
-
-
-  private handleEnter(): void {
-    if (!this.trigger || !this.background || !this.nav || !this.divElement)
-      return;
-
-    this.background.classList.add('open');
-    this.divElement.style.setProperty('opacity', '0.1');
-
-    const dropdown = this.trigger.querySelector('.dropdown') as HTMLElement;
-    if (dropdown) {
-      const dropdownCoords = dropdown.getBoundingClientRect();
-      const navCoords = this.nav.getBoundingClientRect();
-
-      const coords = {
-        height: dropdownCoords.height,
-        width: dropdownCoords.width,
-        top: dropdownCoords.top - navCoords.top,
-        left: dropdownCoords.left - navCoords.left,
-      };
-
-      this.background.style.setProperty('width', `${coords.width}px`);
-      this.background.style.setProperty('height', `${coords.height}px`);
-
-      const transformValue =
-        document.body.offsetWidth > 1100
-          ? `translate(${coords.left - 50}px, ${coords.top - 10}px)`
-          : `translate(${coords.left}px, ${coords.top}px)`;
-
-      this.background.style.setProperty('transform', transformValue);
-    }
-  }
-
-  private handleLeave(): void {
-    if (!this.trigger || !this.background || !this.divElement) return;
-
-    this.trigger.classList.remove('trigger-enter', 'trigger-enter-active');
-    this.background.classList.remove('open');
-    this.divElement.style.removeProperty('opacity');
   }
 }

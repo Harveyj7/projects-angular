@@ -13,6 +13,7 @@ import { Tableau } from './components/tableau/tableau';
 import { Fyp } from './components/fyp/fyp';
 import { About } from './components/about/about';
 import { authGuard } from './services/auth.guard';
+import { Matlab } from './components/matlab/matlab';
 
 export const routes: Routes = [
   {
@@ -59,6 +60,11 @@ export const routes: Routes = [
     path: 'fyp',
     pathMatch: 'full',
     component: Fyp,
+  },
+  {
+    path: 'matlab',
+    pathMatch: 'full',
+    component: Matlab,
   },
   {
     path: 'gbdp',

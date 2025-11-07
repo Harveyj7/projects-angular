@@ -1,48 +1,37 @@
-nav {
-  position: relative;
+nav{
+  margin-left:20px;
 }
 
-nav ul {
+ul {
   list-style: none;
   display: flex;
   flex-wrap: wrap;
-  justify-content: left;
+  gap:30px;
+  padding: 0px 20px;
+  align-items: center;
 }
 
-ul > li > a {
-  margin: 20px;
+a, li {
   position: relative;
-  z-index: 1;
+  justify-content: center;
+  .btn-primary {
+    color: black;
+    text-decoration: none;
+    font-size: 20px;
+    background: rgba(0, 0, 0, 0.2);
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-weight: 600;
+  }
 }
 
-ul > li {
-  position: relative;
-}
-
-.trigger-enter .dropdown {
-  display: block;
-  opacity: 1;
-  z-index: 10;
-  pointer-events: auto;
-}
-
-.trigger-enter .dropdownBackground {
-  opacity: 1;
-  pointer-events: auto;
-}
-
-.arrow {
-  position: absolute;
-  width: 20px;
-  height: 20px;
-  display: block;
-  background: white;
-  transform: translateY(-50%) rotate(45deg);
-  z-index: 6;
-  top: 0;
-}
-
-.about {
+.mid-width {
   min-width: 500px;
   display: flex;
   justify-content: center;
@@ -50,18 +39,10 @@ ul > li {
   line-height: 1.7;
   background: white;
   border-radius: 4px;
-}
-
-.about img {
+  img{
   float: left;
   margin-right: 20px;
-}
-
-.contact {
-  min-width: 20vw;
-  display: block;
-  background: white;
-  border-radius: 4px;
+  }
 }
 
 .title {
@@ -69,14 +50,27 @@ ul > li {
   margin-left: 10%;
 }
 
-.social-links {
-  display: flex;
-  justify-content: space-evenly;
-  flex-direction: row;
+.popover-dialog {
+  position: absolute;
+  top: 120%;
+  left: 50%;
+  transform: translateX(-20%);
+  padding: 1rem;
+  border-radius: 0.5rem;
+  z-index: 10;
+  opacity: 1;
+  background-color: white;
+  border: 1px solid black;
 }
-.social-links img {
-  width: 60px;
-  height: 50px;
+
+.popover-dialog::before {
+  content: '';
+  position: absolute;
+  bottom: 100%;
+  left: 20%;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-bottom: 10px solid;
 }
 
 // Authentication section styles
@@ -119,36 +113,6 @@ ul > li {
   }
 }
 
-
-.button-base {
-  cursor: pointer;
-}
-
-.popover-dialog {
-  position: absolute;
-  top: 100%;
-  left: 50%;
-  transform: translateX(-20%);
-  padding: 1rem;
-  border-radius: 0.5rem;
-  z-index: 10;
-  opacity: 1;
-  background-color: white;
-  border: 1px solid black;
-}
-
-.popover-dialog::before {
-  content: '';
-  position: absolute;
-  bottom: 100%;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 0;
-  height: 0;
-  border-left: 10px solid transparent;
-  border-right: 10px solid transparent;
-  border-bottom: 10px solid;
-}
 
 @media (max-width: 600px) {
   nav ul {

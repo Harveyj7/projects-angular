@@ -1,0 +1,44 @@
+@if(images().length>0){
+
+  <div>
+    <div class="viewport">
+      <div class="track" [style.transform]="'translateX(-' + (currentIndex * 100) + '%)'">
+        @for(image of images(); track $index){
+          <div class="slide">
+            <img
+              [src]="image.src"
+              [alt]="image.alt || 'Carousel image ' + ($index + 1)"
+              [width]="image.width"
+              [height]="image.height"
+              class="image"
+            />
+          </div>
+        }
+      </div>
+      @if(showArrows() && images().length >1){
+        <div class="controls">
+          <button mat-icon-button class="btn btn-prev"
+                  (click)="previousSlide()" aria-label="Previous image">
+            <mat-icon>chevron_left</mat-icon>
+          </button>
+          <button mat-icon-button class="btn btn-next"
+                  (click)="nextSlide()" aria-label="Next image">
+            <mat-icon>chevron_right</mat-icon>
+          </button>
+        </div>
+      }
+    </div>
+    @if(showIndicators() && images().length > 1){
+      <div class="indicators">
+        @for(image of images(); track $index){
+          <button
+            class="indicator"
+            [class.active]="$index === currentIndex"
+            (click)="goToSlide($index)"
+            [attr.aria-label]="'Go to slide ' + ($index + 1)">
+          </button>
+        }
+      </div>
+    }
+  </div>
+}

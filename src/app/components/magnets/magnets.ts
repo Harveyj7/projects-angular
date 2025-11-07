@@ -8,4 +8,14 @@ import { Component } from '@angular/core';
 })
 export class Magnets {
 
+  imageStates:{[key:number]:boolean} = {};
+
+  onImageHover(isHovering: boolean, imgNo:number) {
+    this.imageStates[imgNo] = isHovering;
+  }
+
+  isImageZoomed(imgNo:number) {
+    return this.imageStates[imgNo] || false;
+  }
+
 }

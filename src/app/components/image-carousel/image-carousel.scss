@@ -1,0 +1,79 @@
+.viewport {
+  position: relative;
+  overflow: hidden;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.track {
+  display: flex;
+  transition: transform 0.3s ease-in-out;
+  width: 100%;
+}
+
+.slide {
+  flex: 0 0 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #f5f5f5;
+}
+
+.image {
+  max-width: 100%;
+  max-height: 500px;
+  object-fit: contain;
+  display: block;
+}
+
+.controls {
+  position: absolute;
+  top: 50%;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  pointer-events: none;
+}
+
+.btn {
+  pointer-events: all;
+  background: rgba(255, 255, 255, 0.7);
+  color: #333;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  transition: all 0.2s ease;
+  &:hover {
+    background: rgba(255, 255, 255, 1);
+    transform: scale(1.05);
+  }
+}
+
+
+.btn mat-icon {
+  font-size: 24px;
+  width: 24px;
+  height: 24px;
+}
+
+.indicators {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 16px;
+}
+
+.indicator {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: none;
+  background: #ccc;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  &:hover {
+    background: #999;
+    transform: scale(1.1);
+  }
+  &.active {
+    background: #2196f3;
+  }
+}

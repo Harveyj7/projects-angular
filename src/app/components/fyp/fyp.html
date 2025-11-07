@@ -1,1 +1,50 @@
-<p>fyp works!</p>
+<div class="container">
+  <h1>Underwater "Nano" Glider</h1>
+  <div class="text">
+    <p>
+      My Final Year project involved the design and prototyping and analysis
+      of an underwater “Nano” glider. Current gliders used in oceanography are
+      generally large in scale, often surpassing 50kg in weight. However, for
+      Limnological explorations, these large devices are impractical due to
+      their lack of manoeuvrability in smaller environments. For this reason,
+      the downscaling of underwater gliders is increasing in demand for a
+      range of applications.
+    </p>
+    <app-image-carousel [images]="workflowImages" [showIndicators]="true" [showArrows]="true"></app-image-carousel>
+    <p>
+      The concept selected contains a reservoir connected to a miniature
+      motor- pump. Water is ingested and expelled from the system through the
+      reservoir to vary the system buoyancy. With hydrofoils attached to the
+      hull the glider follows a saw-tooth profile through the water. The
+      design was modelled in CAD and refined and iterated by assessing the
+      forces and moments in bouyancy calculations document.
+    </p>
+    <app-image-carousel [images]="assemblyImages" [showIndicators]="true" [showArrows]="true"></app-image-carousel>
+    <p>
+      First, the internal buoyancy system was prototyped, with the components
+      3D printed, laser cut and the reversable motor- pump purchased used.
+      Once successful buoyancy variation was achieved, the external hull and
+      hydrofoils were prototyped and the whole system assembled. The
+      electronic circuit system used to control the motor speed and direction
+      was then set up.
+    </p>
+    <div>
+      <video width="620" height="480" class="center" controls>
+        <source src="assets/images/bidirection.mp4" type="video/mp4" />
+        Your browser does not support the video tag.
+      </video>
+    </div>
+    <p>
+      A preliminary functioning prototype was made, however, as the
+      prototyping phase of the project was ceased due to corona virus and
+      university facilities were closed, the development on the glider was
+      limited and issues with purchased components hindered the development of
+      the system. As a result, the project was diverged towards modelling and
+      simulating the system to develop an insight into the performance
+      characteristics of the finished product described on page 2.
+    </p>
+  </div>
+  <a class="home center" routerLink="/matlab">Page 2</a>
+  <br><br>
+</div>
+

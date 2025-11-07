@@ -14,7 +14,6 @@ import { NAVBAR } from '../../../constants/navbar';
 import { AuthService, User } from '../../services/auth.service';
 import { LoginModal } from '../login-modal/login-modal';
 import { filter } from 'rxjs';
-import { MatIcon } from '@angular/material/icon';
 interface PopoverState {
   show: WritableSignal<boolean>;
   content: WritableSignal<string>;
@@ -27,7 +26,6 @@ interface PopoverState {
     CommonModule,
     MatDialogModule,
     MatButtonModule,
-    MatIcon,
   ],
   templateUrl: './navbar.html',
   styleUrl: './navbar.scss',
@@ -39,19 +37,24 @@ export class Navbar {
   aboutText: string = this.navbar.about.text;
   infoText: string = this.navbar.information.text;
   contactText: string = this.navbar.contact.text;
-
-  initialDropdownState = signal({
-    isVisible: false,
-    width: 0,
-    height: 0,
-    top: 0,
-    left: 0,
-  });
-  dropdownState: any = signal({});
-
   private dialog = inject(MatDialog);
   private authService = inject(AuthService);
   private router = inject(Router);
+
+  aboutmeState: PopoverState = {
+    show: signal(false),
+    content: signal(this.aboutText),
+  };
+
+  infoState: PopoverState = {
+    show: signal(false),
+    content: signal(this.infoText),
+  };
+
+  contactState: PopoverState = {
+    show: signal(false),
+    content: signal(this.contactText),
+  };
 
   constructor() {
     this.currentUser = this.authService.currentUser;
@@ -80,22 +83,6 @@ export class Navbar {
   logout(): void {
     this.authService.logout();
   }
-
-  aboutmeState: PopoverState = {
-    show: signal(false),
-    content: signal(this.aboutText),
-  };
-  infoState: PopoverState = {
-    show: signal(false),
-    content: signal(this.infoText),
-  };
-
-
-  contactState: PopoverState = {
-    show: signal(false),
-    content: signal(this.contactText),
-  };
-
 
   showPopover(state: PopoverState): void {
     console.log(state.content());
