@@ -49,6 +49,7 @@ interface ApiResponse {
   imports: [BaseChartDirective],
   templateUrl: './balance.html',
   styleUrls: ['./balance.scss'],
+  standalone: true
 })
 export class Balance implements OnInit {
   balanceData: BalanceData[] = [];
@@ -122,7 +123,8 @@ export class Balance implements OnInit {
             if (context.dataset.label === 'Threshold (£320,000)') {
               return `${context.dataset.label}`;
             }
-            return `${context.dataset.label}: ${this.formatCurrency(context.parsed.y)}`;
+            // return `${context.dataset.label}: ${this.formatCurrency(context.parsed.y)}`;
+            return `${context.dataset.label}: ${context.parsed.y}`;
           },
         },
       },
