@@ -1,0 +1,299 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="a5dfc0c0-04b2-4124-9b48-a69f65bed965" name="Changes" comment="minor package updates needed to serve" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="gh-pages" />
+      </map>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;Harveyj7&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/Harveyj7/projects-angular.git",
+    "accountId": "8392d995-94f7-4105-b330-60751b66670a"
+  }
+}]]></component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="ProjectErrors" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 5
+}</component>
+  <component name="ProjectId" id="31sc9PMTl3kQfMxcOvySMwKMU2T" />
+  <component name="ProjectViewState">
+    <option name="autoscrollFromSource" value="true" />
+    <option name="flattenPackages" value="true" />
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;JavaScript Debug.Angular Application.executor&quot;: &quot;Run&quot;,
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultAutoModeForALLUsers.v1&quot;: &quot;true&quot;,
+    &quot;com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;js.linters.configure.manually.selectedeslint&quot;: &quot;true&quot;,
+    &quot;junie.onboarding.icon.badge.shown&quot;: &quot;true&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/harvey/projects-angular/src/assets/images&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.standard&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;/Users/harvey/projects-angular/node_modules/eslint&quot;,
+    &quot;node.js.selected.package.standard&quot;: &quot;&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;prettierjs.PrettierConfiguration.Package&quot;: &quot;/Users/harvey/projects-angular/node_modules/prettier&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;actions.on.save&quot;,
+    &quot;to.speed.mode.migration.done&quot;: &quot;true&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;/Users/harvey/Library/Application Support/JetBrains/IntelliJIdea2025.2/plugins/javascript-plugin/jsLanguageServicesImpl/external&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  }
+}</component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/assets/images" />
+    </key>
+  </component>
+  <component name="RunManager" selected="npm.Angular CLI Server">
+    <configuration name="Angular Application" type="JavascriptDebugType" uri="http://localhost:4200">
+      <method v="2" />
+    </configuration>
+    <configuration name="Angular CLI Server" type="js.build_tools.npm">
+      <package-json value="$PROJECT_DIR$/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="start" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
+      <method v="2" />
+    </configuration>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-9823dce3aa75-bf35d07a577b-intellij.indexing.shared.core-IU-252.27397.103" />
+        <option value="bundled-js-predefined-d6986cc7102b-3aa1da707db6-JavaScript-IU-252.27397.103" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="a5dfc0c0-04b2-4124-9b48-a69f65bed965" name="Changes" comment="" />
+      <created>1756316068324</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1756316068324</updated>
+      <workItem from="1756316069511" duration="16556000" />
+      <workItem from="1756913038514" duration="12779000" />
+      <workItem from="1757077922059" duration="14811000" />
+      <workItem from="1757319714905" duration="12736000" />
+      <workItem from="1759249124189" duration="5609000" />
+      <workItem from="1759749920629" duration="143000" />
+      <workItem from="1759750091430" duration="16852000" />
+      <workItem from="1760699050156" duration="47956000" />
+      <workItem from="1761566281644" duration="598000" />
+      <workItem from="1761648563555" duration="325000" />
+      <workItem from="1761648906421" duration="82000" />
+      <workItem from="1762516633031" duration="9792000" />
+      <workItem from="1762629428550" duration="2368000" />
+      <workItem from="1762728395203" duration="3397000" />
+    </task>
+    <task id="LOCAL-00001" summary="Linted lots">
+      <option name="closed" value="true" />
+      <created>1757078653965</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1757078653965</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Adding authguard for balance">
+      <option name="closed" value="true" />
+      <created>1757086354770</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1757086354770</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Adding authguard for balance 2">
+      <option name="closed" value="true" />
+      <created>1757086391949</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1757086391949</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Fixes to add tableau info in navbar">
+      <option name="closed" value="true" />
+      <created>1757697763536</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1757697763536</updated>
+    </task>
+    <task id="LOCAL-00005" summary="pre upgrade commit">
+      <option name="closed" value="true" />
+      <created>1760287115903</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1760287115903</updated>
+    </task>
+    <task id="LOCAL-00006" summary="lots of rubbish code removal">
+      <option name="closed" value="true" />
+      <created>1760784393131</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1760784393131</updated>
+    </task>
+    <task id="LOCAL-00007" summary="removal from global styles">
+      <option name="closed" value="true" />
+      <created>1760948349326</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1760948349326</updated>
+    </task>
+    <task id="LOCAL-00008" summary="further improvements and adding more screens">
+      <option name="closed" value="true" />
+      <created>1761322621246</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1761322621246</updated>
+    </task>
+    <task id="LOCAL-00009" summary="hiding dead screens">
+      <option name="closed" value="true" />
+      <created>1761395785222</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1761395785222</updated>
+    </task>
+    <task id="LOCAL-00010" summary="hiding dead screens">
+      <option name="closed" value="true" />
+      <created>1762517771674</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1762517771674</updated>
+    </task>
+    <task id="LOCAL-00011" summary="larger updates">
+      <option name="closed" value="true" />
+      <created>1762517861876</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1762517861876</updated>
+    </task>
+    <task id="LOCAL-00012" summary="larger updates">
+      <option name="closed" value="true" />
+      <created>1762517994729</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1762517994729</updated>
+    </task>
+    <task id="LOCAL-00013" summary="Fixing lost login &amp; logout funct">
+      <option name="closed" value="true" />
+      <created>1762522048259</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1762522048259</updated>
+    </task>
+    <task id="LOCAL-00014" summary="removing depricated animations">
+      <option name="closed" value="true" />
+      <created>1762523110000</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1762523110000</updated>
+    </task>
+    <task id="LOCAL-00015" summary="Deploy Angular app to GitHub Pages">
+      <option name="closed" value="true" />
+      <created>1762537110520</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1762537110520</updated>
+    </task>
+    <task id="LOCAL-00016" summary="&quot;Deploy Angular app to GitHub Pages&quot;">
+      <option name="closed" value="true" />
+      <created>1762537294225</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1762537294225</updated>
+    </task>
+    <task id="LOCAL-00017" summary="minor package updates needed to serve">
+      <option name="closed" value="true" />
+      <created>1762768619931</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1762768619931</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Linted lots" />
+    <MESSAGE value="Adding authguard for balance" />
+    <MESSAGE value="Adding authguard for balance 2" />
+    <MESSAGE value="Fixes to add tableau info in navbar" />
+    <MESSAGE value="pre upgrade commit" />
+    <MESSAGE value="lots of rubbish code removal" />
+    <MESSAGE value="removal from global styles" />
+    <MESSAGE value="further improvements and adding more screens" />
+    <MESSAGE value="hiding dead screens" />
+    <MESSAGE value="larger updates" />
+    <MESSAGE value="Fixing lost login &amp; logout funct" />
+    <MESSAGE value="removing depricated animations" />
+    <MESSAGE value="Deploy Angular app to GitHub Pages" />
+    <MESSAGE value="&quot;Deploy Angular app to GitHub Pages&quot;" />
+    <MESSAGE value="minor package updates needed to serve" />
+    <option name="LAST_COMMIT_MESSAGE" value="minor package updates needed to serve" />
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
+  </component>
+</project>
