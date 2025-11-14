@@ -4,13 +4,20 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6fad7280-abd5-4240-ad85-2afc614083a0" name="Changes" comment="updates to package lock" />
+    <list default="true" id="6fad7280-abd5-4240-ad85-2afc614083a0" name="Changes" comment="updates to package lock">
+      <change beforePath="$PROJECT_DIR$/dist/projects/browser/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/dist/projects/browser/index.html" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="gh-pages" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="GitHubPullRequestSearchHistory"><![CDATA[{
@@ -100,7 +107,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1763134371457</updated>
-      <workItem from="1763134372561" duration="2644000" />
+      <workItem from="1763134372561" duration="3492000" />
     </task>
     <task id="LOCAL-00002" summary="updates to package lock">
       <option name="closed" value="true" />
@@ -115,6 +122,12 @@
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+    <option name="exactExcludedFiles">
+      <list>
+        <option value="$PROJECT_DIR$/node_modules/piscina/test/fixtures/notify-then-sleep-or.js" />
+        <option value="$PROJECT_DIR$/node_modules/piscina/test/fixtures/wait-for-notify.js" />
+      </list>
+    </option>
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="updates to package lock" />
