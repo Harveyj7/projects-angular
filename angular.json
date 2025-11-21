@@ -19,7 +19,7 @@
           "options": {
             "outputPath": "docs",
             "browser": "src/main.ts",
-            "baseHref": "/projects-angular/",
+            "baseHref": "./",
             "polyfills": ["zone.js"],
             "tsConfig": "tsconfig.app.json",
             "inlineStyleLanguage": "scss",
