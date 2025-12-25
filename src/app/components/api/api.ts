@@ -7,6 +7,7 @@ import { CommonModule } from '@angular/common';
   imports: [CommonModule],
   templateUrl: './api.html',
   styleUrl: './api.scss',
+  standalone: true
 })
 export class Api implements OnInit {
   tasks: Task[] = [];

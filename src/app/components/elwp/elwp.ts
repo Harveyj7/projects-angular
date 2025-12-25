@@ -23,6 +23,7 @@ interface CurvePosition {
   imports: [],
   templateUrl: './elwp.html',
   styleUrl: './elwp.scss',
+  standalone: true
 })
 export class Elwp implements OnInit, OnDestroy {
   @ViewChild('timelineContainer', { static: false })
