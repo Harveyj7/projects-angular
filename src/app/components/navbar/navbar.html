@@ -1,9 +1,9 @@
 <nav>
   <ul class="ul">
-    <li >
+   <li>
       <a routerLink="" class="btn-primary">Home</a>
     </li>
-    <li >
+   <li>
       <a (mouseenter)="showPopover(aboutmeState)"
          (mouseleave)="hidePopover(aboutmeState)"
         class="btn-primary"> About Me </a>
@@ -14,7 +14,7 @@
         </div>
       }
     </li>
-    <li >
+   <li>
       <a (mouseenter)="showPopover(contactState)"
          (mouseleave)="hidePopover(contactState)" [routerLink]="navbar.contact.href"
          class="btn-primary "> Contact </a>
@@ -26,7 +26,7 @@
       }
     </li>
     @if (this.currentComponent === 'tableau') {
-      <li >
+     <li>
         <a (mouseenter)="showPopover(infoState)"
           (mouseleave)="hidePopover(infoState)"
           class="btn-primary ">
@@ -50,11 +50,11 @@
           (click)="logout()"
         >Logout</a>
     </li>
-<!--      @if (loginState.show()){-->
-<!--        <div class="user-dropdown" >-->
-<!--          <p>Welcome, {{ currentUser()?.email }}</p>-->
-<!--        </div>-->
-<!--      }-->
+      @if (loginState.show()){
+        <div class="user-dropdown" >
+          <p>Welcome, {{ currentUser()?.email }}</p>
+        </div>
+      }
     } @else {
     <li class="auth-section">
         <a (click)="openLoginModal()" class="btn-primary login-btn">Login</a>

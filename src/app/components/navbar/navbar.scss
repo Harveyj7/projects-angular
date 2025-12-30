@@ -96,22 +96,19 @@ a, li {
 
 
 @media (max-width: 600px) {
-  nav ul {
-    flex-direction: row; // Stack items vertically on mobile
-    flex-wrap: wrap;
+
+  .btn-primary{
+    order: 1;
   }
   .auth-section {
-    order: -1; // This will move the auth section to the beginning
+    order: 2;
+  }
+  .title {
+    order: 3;
   }
 
-  ul > li > a {
-    font-size: 15px;
-    text-align: center;
-    padding: 10px 5px;
-    margin: 10px 5px;
-  }
-
-  .about {
+  .popover-dialog {
     min-width: 250px;
+    flex-direction: column;
   }
 }
