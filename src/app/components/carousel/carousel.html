@@ -4,7 +4,10 @@
   (mousedown)="onCarouselMouseDown($event)"
   (mouseleave)="resetCarousel()"
   (mouseup)="resetCarousel()"
-  (mousemove)="onCarouselMouseMove($event)">
+  (mousemove)="onCarouselMouseMove($event)"
+  (touchstart)="onCarouselTouchStart($event)"
+  (touchmove)="onCarouselTouchMove($event)"
+  (touchend)="resetCarousel()">
   @for (project of projectsArray; track project.text; let i = $index) {
   <div class="carousel-box" (dblclick)="onCarouselBoxClick($event, project.href)">
     <h3>{{ project.text }}</h3>

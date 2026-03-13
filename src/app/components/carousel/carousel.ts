@@ -26,6 +26,8 @@ export class Carousel {
   private startX = 0;
   private scrollLeft = 0;
   private hasDragged = false;
+  private touchStartX = 0;
+  private touchScrollLeft = 0;
   public projectsArray = Object.values(PROJECTS);
   private authService = inject(AuthService);
   currentUser: Signal<User | null>;
@@ -59,6 +61,26 @@ export class Carousel {
     carousel.scrollLeft = this.scrollLeft - walk;
   }
 
+  onCarouselTouchStart(e: TouchEvent): void {
+    const carousel = this.carouselRef.nativeElement;
+    this.hasDragged = false;
+    this.touchStartX = e.touches[0].pageX - carousel.offsetLeft;
+    this.touchScrollLeft = carousel.scrollLeft;
+  }
+
+  onCarouselTouchMove(e: TouchEvent): void {
+    if (!this.carouselRef?.nativeElement) return;
+
+    const carousel = this.carouselRef.nativeElement;
+    const x = e.touches[0].pageX - carousel.offsetLeft;
+    const walk = (x - this.touchStartX) * 2;
+
+    if (Math.abs(walk) > 5) {
+      this.hasDragged = true;
+    }
+
+    carousel.scrollLeft = this.touchScrollLeft - walk;
+  }
   onCarouselBoxClick(event: MouseEvent, href: string): void {
     if (this.hasDragged) {
       event.preventDefault();
