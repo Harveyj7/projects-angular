@@ -6,7 +6,7 @@
    <li>
       <a (mouseenter)="showPopover(aboutmeState)"
          (mouseleave)="hidePopover(aboutmeState)"
-        class="btn-primary"> About </a>
+        class="btn-primary">About</a>
       @if (aboutmeState.show()){
         <div class="dialog about">
           <img [src]="navbar.about.src" />
@@ -17,7 +17,7 @@
    <li (mouseenter)="showPopover(contactState)"
        (mouseleave)="hidePopover(contactState)" >
       <a [routerLink]="navbar.contact.href"
-         class="btn-primary "> Contact </a>
+         class="btn-primary ">Contact</a>
       @if (contactState.show()){
         <div  class="dialog contact">
           {{contactState.content()}}
