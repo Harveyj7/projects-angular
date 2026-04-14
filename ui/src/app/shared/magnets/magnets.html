@@ -1,0 +1,46 @@
+<div class="text">
+  <h1 class="title">Renishaw FEMM magnetics investigation</h1>
+  <p>
+    The new CMM product project required strong attractive forces to
+    lock/unlock a hirth coupling mechanism in fixed angular positions when
+    scanning.
+    <br/><br/>
+    Using Finite Element Magnetics Modelling (FEMM4.2) with an iteration
+    program run through Lua scripts, the forces between two N42 grade ring
+    magnets with OD of 46mm and ID of 36mm were analyzed at thicknesses of 0
+    to 10mm.
+  </p>
+  <img
+    (mouseenter)="onImageHover(true,1)"
+    (mouseleave)="onImageHover(false,1)"
+    [class.zoomed]="isImageZoomed(1)"
+    src="assets/images/magnet1.png"/>
+  <p>
+    An analysis of two ring magnets with a fixed outer diameter of 46mm and
+    a thickness of 3mm was automated using a Lua script to run a iterable
+    internal radius from r=23mm to r=0mm.
+    <br/><br/>
+    The results obtained show that decreasing the inner radius of the ring
+    magnet increases the attractive force up to 16mm (ID32), where its
+    slowly drops to 95N when it becomes a disk magnet.
+  </p>
+  <img
+    (mouseenter)="onImageHover(true,2)"
+    (mouseleave)="onImageHover(false,2)"
+    [class.zoomed]="isImageZoomed(2)"
+    src="assets/images/magnet2.png"/>
+  <p>
+    Another invstigation of the effect of magnetic flux containment with a
+    stainless-steel housing around the magnet were undertaken.
+    <br/><br/>
+    This was another considered option for the design of the probe because
+    stonger attractive forces could be achieved between the steel encased
+    magnets.
+  </p>
+  <img
+    (mouseenter)="onImageHover(true,3)"
+    (mouseleave)="onImageHover(false,3)"
+    [class.zoomed]="isImageZoomed(3)"
+    src="assets/images/magnet3.png"/>
+</div>
+<br><br>

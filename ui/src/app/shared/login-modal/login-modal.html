@@ -1,0 +1,79 @@
+<div class="login-modal">
+  <div class="modal-header">
+    <h2>{{ isLoginMode ? 'Login' : 'Create Account' }}</h2>
+    <p class="subtitle">
+      {{ isLoginMode ? 'Welcome back!' : 'Join us today' }}
+    </p>
+  </div>
+
+  <form #authForm="ngForm" (ngSubmit)="onSubmit()">
+    <mat-form-field appearance="fill">
+      <mat-label>Email</mat-label>
+      <input
+        [(ngModel)]="email"
+        [disabled]="isLoading"
+        email
+        matInput
+        name="email"
+        required
+        type="email"
+      />
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Password</mat-label>
+      <input
+        [(ngModel)]="password"
+        [disabled]="isLoading"
+        matInput
+        minlength="6"
+        name="password"
+        required
+        type="password"
+      />
+    </mat-form-field>
+
+    @if (error) {
+      <div class="error">{{ error }}</div>
+    }
+
+    <div class="actions">
+      <button
+        [disabled]="!authForm.form.valid || isLoading"
+        class="submit-btn"
+        color="primary"
+        mat-raised-button
+        type="submit"
+      >
+        @if (!isLoading) {
+          <span> {{ isLoginMode ? 'Login' : 'Create Account' }} </span>
+        } @else {
+          <div class="loading-content">
+            <mat-spinner diameter="20"></mat-spinner>
+            <span
+            >{{ isLoginMode ? 'Logging in...' : 'Creating account...' }}</span
+            >
+          </div>
+        }
+      </button>
+
+      @if (!isLoading) {
+        <div class="mode-toggle">
+        <span>
+          {{
+            isLoginMode ? "Don't have an account?" : "Already have an account?"
+          }}
+        </span>
+          <button
+            (click)="toggleMode()"
+            class="toggle-btn"
+            mat-button
+            type="button"
+          >
+            {{ isLoginMode ? 'Sign up' : 'Sign in' }}
+          </button>
+        </div>
+      }
+    </div>
+  </form>
+</div>
